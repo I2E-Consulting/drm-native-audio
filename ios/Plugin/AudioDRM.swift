@@ -13,7 +13,7 @@ import MediaPlayer
     }
     
     @objc public func playAudioThroughUrl(_ value: String, thumbnail:String) -> String {
-        
+        print("Test")
         if let url = URL(string: value) {
             let playerItem = AVPlayerItem(url: url)
             avplayer.replaceCurrentItem(with: playerItem)
