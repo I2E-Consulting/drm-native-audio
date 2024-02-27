@@ -30,7 +30,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         
         var nowPlayingInfo = [String: Any]()
         nowPlayingInfo[MPMediaItemPropertyTitle] = title
-        nowPlayingInfo[MPMediaItemPropertyArtist] = "BBT Transcend"
+        nowPlayingInfo[MPMediaItemPropertyArtist] = "BBT"
         
         if let albumArtURL = URL(string: thumbnailURL) {
             URLSession.shared.dataTask(with: albumArtURL) { data, response, error in
