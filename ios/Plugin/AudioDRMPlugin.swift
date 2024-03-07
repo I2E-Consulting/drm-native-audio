@@ -22,7 +22,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         self.notifyListeners("soundEnded", data: [:])
     }
     
-    @objc public func setNotificationForAudio(title:String,thumbnailURL:String)
+    @objc public func setNotificationForAudio(title:String,thumbnailURL:String,authorName:String)
     {
         UIApplication.shared.beginReceivingRemoteControlEvents()
         
@@ -30,7 +30,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         
         var nowPlayingInfo = [String: Any]()
         nowPlayingInfo[MPMediaItemPropertyTitle] = title
-        nowPlayingInfo[MPMediaItemPropertyArtist] = "BBT Transcend"
+        nowPlayingInfo[MPMediaItemPropertyArtist] = authorName
         
         if let albumArtURL = URL(string: thumbnailURL) {
             URLSession.shared.dataTask(with: albumArtURL) { data, response, error in
@@ -77,8 +77,10 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
     {
         let audioURL = call.getString("audioURL") ?? "error"
         let audioTitle = call.getString("title") ?? "error"
+        let audioAuthor = call.getString("authorName") ?? " "
         let thumbnailUrl = call.getString("notificationThumbnail") ?? "Invalid"
         let seekTimeTo = call.getDouble("seekTime") ??  00
+        
         do {
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let error {
@@ -100,7 +102,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
                             sound in
                             if sound
                             {
-                                playMusic(streamingURL: audioURL,title: audioTitle, thumbnailURL: thumbnailUrl,startTime: seekTimeTo)
+                                playMusic(streamingURL: audioURL,title: audioTitle, thumbnailURL: thumbnailUrl,startTime: seekTimeTo, authorName: audioAuthor)
                             }
                         }
                     }
@@ -126,7 +128,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         }
     }
     
-    func playMusic(streamingURL:String, title:String,thumbnailURL: String,startTime:Double)
+    func playMusic(streamingURL:String, title:String,thumbnailURL: String,startTime:Double, authorName:String)
     {
         let escapedString = streamingURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         AVPlayerConfiguration.sharedInstance.setPlayerWithURL()
@@ -155,7 +157,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
             
             AVPlayerConfiguration.sharedInstance.player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { [self] (CMTime) -> Void in
                 if AVPlayerConfiguration.sharedInstance.player.currentItem?.status == .readyToPlay {
-                    setNotificationForAudio(title: title, thumbnailURL: thumbnailURL)
+                    setNotificationForAudio(title: title, thumbnailURL: thumbnailURL, authorName: authorName)
 
                     if (AVPlayerConfiguration.sharedInstance.player.currentItem?.duration) != nil
                     {
