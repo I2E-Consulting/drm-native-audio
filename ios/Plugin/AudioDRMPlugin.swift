@@ -16,46 +16,11 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
     private var audioDRMViewModel = AudioDRMViewModel()
     
     let contentID: String! = "transcendmediaservices.keydelivery.eastus.media.azure.net"
-    
+    var nowPlayingInfo = [String: Any]()
+
     
     @objc func finishedPlaying( _ myNotification:NSNotification) {
         self.notifyListeners("soundEnded", data: [:])
-    }
-    
-    @objc public func setNotificationForAudio(title:String,thumbnailURL:String,authorName:String)
-    {
-        UIApplication.shared.beginReceivingRemoteControlEvents()
-        
-        guard let item = AVPlayerConfiguration.sharedInstance.player.currentItem else {return}
-        
-        var nowPlayingInfo = [String: Any]()
-        nowPlayingInfo[MPMediaItemPropertyTitle] = title
-        nowPlayingInfo[MPMediaItemPropertyArtist] = authorName
-        
-        if let albumArtURL = URL(string: thumbnailURL) {
-            URLSession.shared.dataTask(with: albumArtURL) { data, response, error in
-                if let data = data, let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
-                            return image
-                        }
-                        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = item.asset.duration.seconds
-                        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = AVPlayerConfiguration.sharedInstance.player.rate
-                        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = item.currentTime().seconds
-                        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-                    }
-                }
-            }.resume()
-        } else {
-            
-            nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = item.asset.duration.seconds
-            nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = AVPlayerConfiguration.sharedInstance.player.rate
-            nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = item.currentTime().seconds
-            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-        }
-        
-        
-        addActionsToControlCenter()
     }
     
     @objc func pauseAudio(_ call: CAPPluginCall)
@@ -111,27 +76,12 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         }
     }
     
-    func removeTimeObserver() {
-        if let timeObserverToken = timeObserverToken {
-            AVPlayerConfiguration.sharedInstance.player.removeTimeObserver(timeObserverToken)
-            self.timeObserverToken = nil
-        }
-    }
-    
-    func seekToTimeWhileLoading(playerItem: AVPlayerItem, startTime: Double) {
-        let time = CMTime(seconds: startTime, preferredTimescale: 1_000)
-        playerItem.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { [weak self] finished in
-            guard let self = self, finished else { return }
-            AVPlayerConfiguration.sharedInstance.player.play()
-            
-            self.updateNowPlayingInfo(time: startTime)
-        }
-    }
-    
     func playMusic(streamingURL:String, title:String,thumbnailURL: String,startTime:Double, authorName:String)
     {
         let escapedString = streamingURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         AVPlayerConfiguration.sharedInstance.setPlayerWithURL()
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+
         if let url = URL(string: escapedString!) {
             
             let asset = AVURLAsset(url: url)
@@ -148,6 +98,28 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
                 
                 //self.updateNowPlayingInfo(time: startTime)
             }
+            
+            guard let item = AVPlayerConfiguration.sharedInstance.player.currentItem else {return}
+            
+            nowPlayingInfo[MPMediaItemPropertyTitle] = title
+            nowPlayingInfo[MPMediaItemPropertyArtist] = authorName
+            
+            if let albumArtURL = URL(string: thumbnailURL) {
+                URLSession.shared.dataTask(with: albumArtURL) { data, response, error in
+                    if let data = data, let image = UIImage(data: data) {
+                        DispatchQueue.main.async { [self] in
+                            nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
+                                return image
+                            }
+                            nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = item.asset.duration.seconds
+                            nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = AVPlayerConfiguration.sharedInstance.player.rate
+                            nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = item.currentTime().seconds
+                            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+                        }
+                    }
+                }.resume()
+            }
+            
             
             NotificationCenter.default.addObserver(self, selector: #selector(self.finishedPlaying(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  AVPlayerConfiguration.sharedInstance.player.currentItem)
             NotificationCenter.default.addObserver(self, selector: #selector(handleAudioSessionInterruption), name: AVAudioSession.interruptionNotification, object: AVAudioSession.sharedInstance())
@@ -196,6 +168,58 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         }
     }
     
+    @objc public func setNotificationForAudio(title:String,thumbnailURL:String,authorName:String)
+    {
+        
+        guard let item = AVPlayerConfiguration.sharedInstance.player.currentItem else {return}
+        
+        nowPlayingInfo[MPMediaItemPropertyTitle] = title
+        nowPlayingInfo[MPMediaItemPropertyArtist] = authorName
+        
+        if let albumArtURL = URL(string: thumbnailURL) {
+            URLSession.shared.dataTask(with: albumArtURL) { data, response, error in
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async { [self] in
+                        nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
+                            return image
+                        }
+                        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = item.asset.duration.seconds
+                        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = AVPlayerConfiguration.sharedInstance.player.rate
+                        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = item.currentTime().seconds
+                        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+                    }
+                }
+            }.resume()
+        } else {
+            
+            nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = item.asset.duration.seconds
+            nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = AVPlayerConfiguration.sharedInstance.player.rate
+            nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = item.currentTime().seconds
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+        }
+        
+        
+        addActionsToControlCenter()
+    }
+    
+    func removeTimeObserver() {
+        if let timeObserverToken = timeObserverToken {
+            AVPlayerConfiguration.sharedInstance.player.removeTimeObserver(timeObserverToken)
+            self.timeObserverToken = nil
+        }
+    }
+    
+    func seekToTimeWhileLoading(playerItem: AVPlayerItem, startTime: Double) {
+        let time = CMTime(seconds: startTime, preferredTimescale: 1_000)
+        playerItem.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { [weak self] finished in
+            guard let self = self, finished else { return }
+            AVPlayerConfiguration.sharedInstance.player.play()
+            
+            self.updateNowPlayingInfo(time: startTime)
+        }
+    }
+    
+   
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "timeControlStatus", let player = object as? AVPlayer {
             if player.timeControlStatus == .paused {
