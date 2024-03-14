@@ -46,12 +46,6 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         let thumbnailUrl = call.getString("notificationThumbnail") ?? "Invalid"
         let seekTimeTo = call.getDouble("seekTime") ??  00
         
-        do {
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch let error {
-            print(error.localizedDescription)
-        }
-        
         audioDRMViewModel.audioDRMToken = call.getString("token") ?? "invalid token"
         audioDRMViewModel.getSkdWithAlamofire(url: audioURL)
         { [self]
@@ -81,6 +75,18 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         let escapedString = streamingURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         AVPlayerConfiguration.sharedInstance.setPlayerWithURL()
 
+        let existingPlayer = AVPlayerConfiguration.sharedInstance.player
+        if existingPlayer.rate != 0 {
+            existingPlayer.pause()
+            existingPlayer.replaceCurrentItem(with: nil)
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
         if let url = URL(string: escapedString!) {
             
             let asset = AVURLAsset(url: url)
