@@ -99,26 +99,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
                 //self.updateNowPlayingInfo(time: startTime)
             }
             
-            guard let item = AVPlayerConfiguration.sharedInstance.player.currentItem else {return}
-            
-            nowPlayingInfo[MPMediaItemPropertyTitle] = title
-            nowPlayingInfo[MPMediaItemPropertyArtist] = authorName
-            
-            if let albumArtURL = URL(string: thumbnailURL) {
-                URLSession.shared.dataTask(with: albumArtURL) { data, response, error in
-                    if let data = data, let image = UIImage(data: data) {
-                        DispatchQueue.main.async { [self] in
-                            nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
-                                return image
-                            }
-                            nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = item.asset.duration.seconds
-                            nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = AVPlayerConfiguration.sharedInstance.player.rate
-                            nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = item.currentTime().seconds
-                            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-                        }
-                    }
-                }.resume()
-            }
+          
             
             
             NotificationCenter.default.addObserver(self, selector: #selector(self.finishedPlaying(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  AVPlayerConfiguration.sharedInstance.player.currentItem)
