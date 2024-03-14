@@ -80,7 +80,6 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
     {
         let escapedString = streamingURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         AVPlayerConfiguration.sharedInstance.setPlayerWithURL()
-        UIApplication.shared.beginReceivingRemoteControlEvents()
 
         if let url = URL(string: escapedString!) {
             
@@ -151,6 +150,8 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
     
     @objc public func setNotificationForAudio(title:String,thumbnailURL:String,authorName:String)
     {
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+
         
         guard let item = AVPlayerConfiguration.sharedInstance.player.currentItem else {return}
         
