@@ -31,9 +31,11 @@ export class AppComponent implements OnInit {
     AudioDRM.loadAzureDRMSoundURL(
       {
         audioURL:"https://transcendmediaservices-usea.streaming.media.azure.net/d167d988-e09f-4bbb-b560-2d84e9a7cb72/1626412224_11 CHAPTER 02_64x64_A.ism/manifest(format=m3u8-cmaf,encryption=cbcs-aapl)",
-        token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJteWlzc3VlciIsImF1ZCI6Im15YXVkaWVuY2UiLCJ1cm46bWljcm9zb2Z0OmF6dXJlOm1lZGlhc2VydmljZXM6Y29udGVudGtleWlkZW50aWZpZXIiOiI1YTljNzgwNS03MzlkLTRlNzAtYWQyNy1kM2IyNTdhNGE3YmUiLCJleHAiOjE3MDkwMTE1MjF9.7fJ_lCMgMcmjYf2oyGSw-KO18vltcRIyAo8tK2lkrMs",
+        token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJteWlzc3VlciIsImF1ZCI6Im15YXVkaWVuY2UiLCJ1cm46bWljcm9zb2Z0OmF6dXJlOm1lZGlhc2VydmljZXM6Y29udGVudGtleWlkZW50aWZpZXIiOiI1YTljNzgwNS03MzlkLTRlNzAtYWQyNy1kM2IyNTdhNGE3YmUiLCJleHAiOjE3MTA0ODc5OTd9.tF8GZwKKGrpFJVQ-vnpMYen5FE1ytRTFt7VTa1clLv4",
         notificationThumbnail: "https://picsum.photos/200/300",
-        title:"Bhagvad Gita"
+        title:"Bhagvad Gita",
+        seekTime:60,
+        authorName: ""
       })
 
       AudioDRM.addListener('soundEnded', () => {
@@ -68,6 +70,10 @@ export class AppComponent implements OnInit {
       AudioDRM.addListener('isAudioPlaying',() => {
         console.log("Event audio is played")
       })
+
+      AudioDRM.addListener('playerError', (error) => {
+        console.error('AVPlayer Error:', error);
+      });
 
   }
 
@@ -116,10 +122,6 @@ export class AppComponent implements OnInit {
   pause(): void {
     AudioDRM.pauseAudio()
   }
-
-
-
-
 
 
 

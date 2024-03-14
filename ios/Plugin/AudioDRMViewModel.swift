@@ -45,35 +45,34 @@ class AudioDRMViewModel
         task.resume()
     }
 
-     func processLicenseURI(_ licenseURI: String, originalUrl: String,completion: @escaping (Bool) -> Void) {
+    func processLicenseURI(_ licenseURI: String, originalUrl: String,completion: @escaping (Bool) -> Void) {
+    
+    self.licenseURI = licenseURI
+    
+        DispatchQueue.main.async { [self] in
+        self.tempIndex = getIndexOfSubString(fullString: self.licenseURI, searchString: "URI")
+        self.licenseURI = String(self.licenseURI.dropFirst(self.tempIndex))
+        self.tempIndex =  getIndexOfSubString(fullString: self.licenseURI, searchString: "#EXT")
+        self.licenseURI = String(self.licenseURI.dropLast(self.licenseURI.count - self.tempIndex))
+        self.licenseURI = String(self.licenseURI.dropFirst(5))
+        self.licenseURI = self.licenseURI.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.licenseURI = String(self.licenseURI.dropLast(1))
+            print(self.licenseURI)
+        self.tempIndex = getIndexOfSubString(fullString: originalUrl, searchString: ".ism/")
+        self.tempUrl = String(originalUrl.dropLast(originalUrl.count - (self.tempIndex + 5)))
         
-        self.licenseURI = licenseURI
-        
-         DispatchQueue.main.async { [self] in
-            self.tempIndex = getIndexOfSubString(fullString: self.licenseURI, searchString: "URI")
-            self.licenseURI = String(self.licenseURI.dropFirst(self.tempIndex))
-            self.tempIndex =  getIndexOfSubString(fullString: self.licenseURI, searchString: "#EXT")
-            self.licenseURI = String(self.licenseURI.dropLast(self.licenseURI.count - self.tempIndex))
-            self.licenseURI = String(self.licenseURI.dropFirst(5))
-            self.licenseURI = self.licenseURI.trimmingCharacters(in: .whitespacesAndNewlines)
-            self.licenseURI = String(self.licenseURI.dropLast(1))
-             print(self.licenseURI)
-            self.tempIndex = getIndexOfSubString(fullString: originalUrl, searchString: ".ism/")
-            self.tempUrl = String(originalUrl.dropLast(originalUrl.count - (self.tempIndex + 5)))
-            
-            guard let escapedString = self.tempUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-                  let urlString = URL(string: escapedString) else {
-                completion(false)
-                return
-            }
-            
-
-             secondURL = "\(urlString)\(self.licenseURI)"
-            // print(secondURL)
-             completion(true)
+        guard let escapedString = self.tempUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                let urlString = URL(string: escapedString) else {
+            completion(false)
+            return
         }
-    }
+        
 
+            secondURL = "\(urlString)\(self.licenseURI)"
+        // print(secondURL)
+            completion(true)
+    }
+}
 
     func getSkdFromSecondURL(url: String, completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: url) else {
@@ -107,9 +106,6 @@ class AudioDRMViewModel
 
         task.resume()
     }
-
-
-
 
     func extractKeyDeliveryURL(from response: String) -> String? {
         let pattern = #"URI="(skd:\/\/[^"]+)"#

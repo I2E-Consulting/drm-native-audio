@@ -1,7 +1,7 @@
 import { PluginListenerHandle } from "@capacitor/core";
 
 export interface AudioDRMPlugin {
-  loadAzureDRMSoundURL(options: { audioURL:String,token:String,notificationThumbnail:String,title:String, }):Promise<void>;
+  loadAzureDRMSoundURL(options: { audioURL:String, authorName: String,title:String,notificationThumbnail:String,seekTime:number, token:String}):Promise<void>;
   pauseAudio(): Promise<void>;
   setAudioPlaybackRate(options: { speed: number }): Promise<void>;
   seekToTime(options: { seekTime: number }): Promise<void>;
