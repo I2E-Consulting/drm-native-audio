@@ -394,7 +394,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
             UIApplication.shared.endReceivingRemoteControlEvents()
         }
         
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
+        // MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
         do {
             try AVAudioSession.sharedInstance().setActive(false)
         } catch {
