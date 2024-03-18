@@ -10,14 +10,14 @@ import MediaPlayer
 public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
     
     private let implementation = AudioDRM()
-        
+    
     private var timeObserverToken: Any?
     private var playerItemStatusObserver: NSKeyValueObservation?
     private var audioDRMViewModel = AudioDRMViewModel()
     
     let contentID: String! = "transcendmediaservices.keydelivery.eastus.media.azure.net"
     var nowPlayingInfo = [String: Any]()
-
+    
     
     @objc func finishedPlaying( _ myNotification:NSNotification) {
         DispatchQueue.main.async
@@ -44,16 +44,49 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
     @objc func getCurrentTime(_ call: CAPPluginCall)
     {
         let currentTimeSeconds = CMTimeGetSeconds(AVPlayerConfiguration.sharedInstance.player.currentTime())
-
+        
         call.resolve([
             "time":currentTimeSeconds
         ])
         
     }
     
+    @objc func removeNotificationAndClearAudio(_ call: CAPPluginCall)
+    {
+        AVPlayerConfiguration.sharedInstance.player.pause()
+        AVPlayerConfiguration.sharedInstance.player.rate = 0
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
+        
+        DispatchQueue.main.async {
+            UIApplication.shared.endReceivingRemoteControlEvents()
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch {
+            print("Failed to deactivate audio session: \(error)")
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            AVPlayerConfiguration.sharedInstance.player.pause()
+            AVPlayerConfiguration.sharedInstance.player.rate = 0
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
+            
+            DispatchQueue.main.async {
+                UIApplication.shared.endReceivingRemoteControlEvents()
+            }
+            
+            do {
+                try AVAudioSession.sharedInstance().setActive(false)
+            } catch {
+                print("Failed to deactivate audio session: \(error)")
+            }
+        }
+        
+        call.resolve()
+    }
     
     
-  
     @objc func loadAzureDRMSoundURL(_ call: CAPPluginCall)
     {
         let audioURL = call.getString("audioURL") ?? "error"
@@ -90,7 +123,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
     {
         let escapedString = streamingURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         AVPlayerConfiguration.sharedInstance.setPlayerWithURL()
-
+        
         let existingPlayer = AVPlayerConfiguration.sharedInstance.player
         if existingPlayer.rate != 0 {
             existingPlayer.pause()
@@ -120,7 +153,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
                 //self.updateNowPlayingInfo(time: startTime)
             }
             
-           NotificationCenter.default.addObserver(self, selector: #selector(self.finishedPlaying(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  AVPlayerConfiguration.sharedInstance.player.currentItem)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.finishedPlaying(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  AVPlayerConfiguration.sharedInstance.player.currentItem)
             NotificationCenter.default.addObserver(self, selector: #selector(handleAudioSessionInterruption), name: AVAudioSession.interruptionNotification, object: AVAudioSession.sharedInstance())
             NotificationCenter.default.addObserver(self, selector: #selector(errorNotificationCall), name: .audioPlayerErrorNotification , object: nil)
             
@@ -129,7 +162,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
             AVPlayerConfiguration.sharedInstance.player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { [self] (CMTime) -> Void in
                 if AVPlayerConfiguration.sharedInstance.player.currentItem?.status == .readyToPlay {
                     setNotificationForAudio(title: title, thumbnailURL: thumbnailURL, authorName: authorName)
-
+                    
                     if (AVPlayerConfiguration.sharedInstance.player.currentItem?.duration) != nil
                     {
                         let totalSeconds = CMTimeGetSeconds((AVPlayerConfiguration.sharedInstance.player.currentItem?.asset.duration)!)
@@ -148,10 +181,10 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
                                 self?.notifyListeners("isBuffering", data: [:])
                             }
                         } else {
-                           
+                            
                         }
                     }
-
+                    
                     playerItemStatusObserver = AVPlayerConfiguration.sharedInstance.player.currentItem?.observe(\.status, options: [.new, .old], changeHandler: { (playerItem, change) in
                         if playerItem.status == .failed {
                             guard let error = playerItem.error else { return }
@@ -159,7 +192,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
                         }
                     })
                 }
-               
+                
                 
             }
         }else
@@ -171,7 +204,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
     @objc public func setNotificationForAudio(title:String,thumbnailURL:String,authorName:String)
     {
         UIApplication.shared.beginReceivingRemoteControlEvents()
-
+        
         guard let item = AVPlayerConfiguration.sharedInstance.player.currentItem else {return}
         
         nowPlayingInfo[MPMediaItemPropertyTitle] = title
@@ -220,7 +253,6 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         }
     }
     
-   
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "timeControlStatus", let player = object as? AVPlayer {
             if player.timeControlStatus == .paused {
@@ -359,7 +391,6 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         }
     }
     
-    
     @objc func setAudioPlaybackRate(_ call: CAPPluginCall)
     {
         let playbackRate = call.getFloat("speed") ?? 1.0
@@ -371,7 +402,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         let seconds = call.getDouble("seekTime") ?? 0.0
         let preferredTimeScale: CMTimeScale = 1_000
         let time = CMTime(seconds: seconds, preferredTimescale: preferredTimeScale)
-
+        
         DispatchQueue.main.async {
             AVPlayerConfiguration.sharedInstance.player.seek(to: time, completionHandler: { [weak self] success in
                 guard let self = self else { return }
@@ -403,7 +434,7 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
             MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
         }
     }
-
+    
     @objc func stopCurrentAudio(_ call: CAPPluginCall)
     {
         AVPlayerConfiguration.sharedInstance.player.pause()
@@ -478,13 +509,11 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         }
     }
     
-    
     @objc func notificationPlay() -> MPRemoteCommandHandlerStatus
     {
         AVPlayerConfiguration.sharedInstance.player.play()
         return .success
     }
-    
     
     @objc func notificationPause() -> MPRemoteCommandHandlerStatus
     {
@@ -495,10 +524,9 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
     @objc func previousButtonTapped() -> MPRemoteCommandHandlerStatus
     {
         self.notifyListeners("notificationPreviousCalled", data: [:])
-
+        
         return .success
     }
-    
     
     @objc func nextButtonTapped() -> MPRemoteCommandHandlerStatus
     {

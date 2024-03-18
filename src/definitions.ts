@@ -18,6 +18,7 @@ export interface AudioDRMPlugin {
   playAudio(): Promise<void>;
   getPaused(): Promise<{ paused: boolean }>;
   getCurrentTime():Promise<{time:number }>;
+  removeNotificationAndClearAudio():Promise<void>;
 
 }
 

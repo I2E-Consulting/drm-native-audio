@@ -29,6 +29,7 @@ npx cap sync
 * [`playAudio()`](#playaudio)
 * [`getPaused()`](#getpaused)
 * [`getCurrentTime()`](#getcurrenttime)
+* [`removeNotificationAndClearAudio()`](#removenotificationandclearaudio)
 * [Interfaces](#interfaces)
 
 </docgen-index>
@@ -248,6 +249,15 @@ getCurrentTime() => Promise<{ time: number; }>
 ```
 
 **Returns:** <code>Promise&lt;{ time: number; }&gt;</code>
+
+--------------------
+
+
+### removeNotificationAndClearAudio()
+
+```typescript
+removeNotificationAndClearAudio() => Promise<void>
+```
 
 --------------------
 

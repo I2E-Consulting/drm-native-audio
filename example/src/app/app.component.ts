@@ -83,6 +83,11 @@ export class AppComponent implements OnInit {
     console.log("Audio Paused:"+ result.paused)
   }
 
+  removeNotification()
+  {
+    AudioDRM.removeNotificationAndClearAudio()
+  }
+
   stopAudio()
   {
     AudioDRM.stopCurrentAudio()
