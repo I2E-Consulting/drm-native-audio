@@ -30,8 +30,8 @@ export class AppComponent implements OnInit {
   {
     AudioDRM.loadAzureDRMSoundURL(
       {
-        audioURL:"https://transcendmediaservices-usea.streaming.media.azure.net/d167d988-e09f-4bbb-b560-2d84e9a7cb72/1626412224_11 CHAPTER 02_64x64_A.ism/manifest(format=m3u8-cmaf,encryption=cbcs-aapl)",
-        token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJteWlzc3VlciIsImF1ZCI6Im15YXVkaWVuY2UiLCJ1cm46bWljcm9zb2Z0OmF6dXJlOm1lZGlhc2VydmljZXM6Y29udGVudGtleWlkZW50aWZpZXIiOiI1YTljNzgwNS03MzlkLTRlNzAtYWQyNy1kM2IyNTdhNGE3YmUiLCJleHAiOjE3MTA0ODc5OTd9.tF8GZwKKGrpFJVQ-vnpMYen5FE1ytRTFt7VTa1clLv4",
+        audioURL:"https://transcendmediaservices-usea.streaming.media.azure.net/b03b8116-7fd2-489c-b860-64162ed35bc7/1681888961_05 Chapter 04.ism/manifest(format=m3u8-aapl,encryption=cbcs-aapl)",
+        token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJteWlzc3VlciIsImF1ZCI6Im15YXVkaWVuY2UiLCJ1cm46bWljcm9zb2Z0OmF6dXJlOm1lZGlhc2VydmljZXM6Y29udGVudGtleWlkZW50aWZpZXIiOiI1YTljNzgwNS03MzlkLTRlNzAtYWQyNy1kM2IyNTdhNGE3YmUiLCJleHAiOjE3MTA4NTI5NTZ9._IHdI3d8TEYY3anikM-9LOsjPEtzQZh1_qVy0DAxCHg",
         notificationThumbnail: "https://picsum.photos/200/300",
         title:"Bhagvad Gita",
         seekTime:60,
@@ -53,10 +53,7 @@ export class AppComponent implements OnInit {
       });
 
 
-        AudioDRM.addListener('timeUpdate', (info: any) => {
-          this.currentTime = info.time;
-        //  console.log('Time Update:', info.time);
-      });
+    
 
       AudioDRM.addListener('audioLoaded', (info: any) => {
         this.soundDuration = info.duration;
@@ -75,6 +72,7 @@ export class AppComponent implements OnInit {
         console.error('AVPlayer Error:', error);
       });
 
+    
   }
 
 
@@ -108,10 +106,13 @@ export class AppComponent implements OnInit {
   });
 
 
-    AudioDRM.addListener('timeUpdate', (info: any) => {
-      this.currentTime = info.time;
-      console.log('Time Update:', info.time);
-  });
+  }
+
+  getTime()
+  {
+    AudioDRM.getCurrentTime().then((time) => {
+      console.log("Current time:",time);
+    })
   }
 
   play(): void

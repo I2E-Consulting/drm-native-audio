@@ -9,6 +9,10 @@ export class AudioDRMWeb extends WebPlugin implements AudioDRMPlugin {
       platforms: ['web'],
     });
   }
+  async getCurrentTime(): Promise<{time:number }> {
+    console.warn('Library not supported to web');
+    return { time:0 } ;
+  }
   async getPaused(): Promise<{ paused: boolean }> {
     console.warn('Library not supported to web');
     return { paused:false }

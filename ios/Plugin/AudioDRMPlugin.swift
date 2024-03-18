@@ -20,7 +20,10 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
 
     
     @objc func finishedPlaying( _ myNotification:NSNotification) {
-        self.notifyListeners("soundEnded", data: [:])
+        DispatchQueue.main.async
+        {
+            self.notifyListeners("soundEnded", data: [:])
+        }
     }
     
     @objc func pauseAudio(_ call: CAPPluginCall)
@@ -38,6 +41,19 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
         
     }
     
+    @objc func getCurrentTime(_ call: CAPPluginCall)
+    {
+        let currentTimeSeconds = CMTimeGetSeconds(AVPlayerConfiguration.sharedInstance.player.currentTime())
+
+        call.resolve([
+            "time":currentTimeSeconds
+        ])
+        
+    }
+    
+    
+    
+  
     @objc func loadAzureDRMSoundURL(_ call: CAPPluginCall)
     {
         let audioURL = call.getString("audioURL") ?? "error"
@@ -116,22 +132,23 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
 
                     if (AVPlayerConfiguration.sharedInstance.player.currentItem?.duration) != nil
                     {
-                        
                         let totalSeconds = CMTimeGetSeconds((AVPlayerConfiguration.sharedInstance.player.currentItem?.asset.duration)!)
-                        self.notifyListeners("audioLoaded", data: ["duration": totalSeconds])
-                        
+                        DispatchQueue.main.async
+                        {
+                            self.notifyListeners("audioLoaded", data: ["duration": totalSeconds])
+                        }
                     }
                     
                     timeObserverToken = AVPlayerConfiguration.sharedInstance.player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] (CMTime) in
                         guard let strongSelf = self else { return }
                         
                         if AVPlayerConfiguration.sharedInstance.player.currentItem?.isPlaybackLikelyToKeepUp == false {
-                            self?.notifyListeners("isBuffering", data: [:])
+                            DispatchQueue.main.async
+                            {
+                                self?.notifyListeners("isBuffering", data: [:])
+                            }
                         } else {
-                            let currentTimeSeconds = CMTimeGetSeconds(AVPlayerConfiguration.sharedInstance.player.currentTime())
-                            strongSelf.notifyListeners("timeUpdate", data: ["time": currentTimeSeconds])
-                            
-                            
+                           
                         }
                     }
 
@@ -207,12 +224,15 @@ public class AudioDRMPlugin: CAPPlugin, AVAssetResourceLoaderDelegate {
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "timeControlStatus", let player = object as? AVPlayer {
             if player.timeControlStatus == .paused {
-               // print("isAudioPause")
-                self.notifyListeners("isAudioPause", data: [:])
+                DispatchQueue.main.async
+                {
+                    self.notifyListeners("isAudioPause", data: [:])
+                }
             } else if player.timeControlStatus == .playing {
-                //print("isAudioPlaying")
-                self.notifyListeners("isAudioPlaying", data: [:])
-
+                DispatchQueue.main.async
+                {
+                    self.notifyListeners("isAudioPlaying", data: [:])
+                }
             }
         }
     }

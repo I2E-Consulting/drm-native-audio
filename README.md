@@ -23,12 +23,12 @@ npx cap sync
 * [`addListener('audioLoaded', ...)`](#addlisteneraudioloaded)
 * [`addListener('notificationPreviousCalled', ...)`](#addlistenernotificationpreviouscalled)
 * [`addListener('notificationNextCalled', ...)`](#addlistenernotificationnextcalled)
-* [`addListener('timeUpdate', ...)`](#addlistenertimeupdate)
 * [`addListener('playerError', ...)`](#addlistenerplayererror)
 * [`addListener('isAudioPlaying', ...)`](#addlistenerisaudioplaying)
 * [`addListener('isAudioPause', ...)`](#addlistenerisaudiopause)
 * [`playAudio()`](#playaudio)
 * [`getPaused()`](#getpaused)
+* [`getCurrentTime()`](#getcurrenttime)
 * [Interfaces](#interfaces)
 
 </docgen-index>
@@ -173,22 +173,6 @@ addListener(eventName: 'notificationNextCalled', listenerFunc: () => void) => Pr
 --------------------
 
 
-### addListener('timeUpdate', ...)
-
-```typescript
-addListener(eventName: 'timeUpdate', listenerFunc: (currentTime: number) => void) => Promise<PluginListenerHandle>
-```
-
-| Param              | Type                                          |
-| ------------------ | --------------------------------------------- |
-| **`eventName`**    | <code>'timeUpdate'</code>                     |
-| **`listenerFunc`** | <code>(currentTime: number) =&gt; void</code> |
-
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
-
---------------------
-
-
 ### addListener('playerError', ...)
 
 ```typescript
@@ -253,6 +237,17 @@ getPaused() => Promise<{ paused: boolean; }>
 ```
 
 **Returns:** <code>Promise&lt;{ paused: boolean; }&gt;</code>
+
+--------------------
+
+
+### getCurrentTime()
+
+```typescript
+getCurrentTime() => Promise<{ time: number; }>
+```
+
+**Returns:** <code>Promise&lt;{ time: number; }&gt;</code>
 
 --------------------
 

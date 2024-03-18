@@ -10,7 +10,7 @@ CAP_PLUGIN(AudioDRMPlugin, "AudioDRM",
            CAP_PLUGIN_METHOD(setAudioPlaybackRate, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(seekToTime, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(stopCurrentAudio, CAPPluginReturnPromise);
-           CAP_PLUGIN_METHOD(getPaused, CAPPluginReturnPromise);           
-           
+           CAP_PLUGIN_METHOD(getPaused, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(getCurrentTime, CAPPluginReturnPromise);
 )
 
