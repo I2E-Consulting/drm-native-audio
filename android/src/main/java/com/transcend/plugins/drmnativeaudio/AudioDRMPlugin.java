@@ -4,12 +4,10 @@ import static android.media.AudioAttributes.ALLOW_CAPTURE_BY_NONE;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.media.AudioFocusRequest;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -50,6 +48,7 @@ import java.util.List;
 
 public class AudioDRMPlugin extends Plugin {
 
+    MediaSource mediaSource = null;
     @SuppressLint("UnsafeOptInUsageError")
     private DefaultTrackSelector trackSelector;
     private Handler handler;
@@ -170,7 +169,7 @@ public class AudioDRMPlugin extends Plugin {
         String value = call.getString("value");
 
         JSObject ret = new JSObject();
-        ret.put("value", "");
+        ret.put("value", implementation.echo(value));
         call.resolve(ret);
     }
 
@@ -180,7 +179,6 @@ public class AudioDRMPlugin extends Plugin {
         runnable = new Runnable() {
             @Override
             public void run() {
-                checkForScreenRecordingApps(getContext());
                 if (player != null) {
                     if (!player.isPlaying() && player.getPlaybackState() == Player.STATE_READY) {
                         notifyListeners("isAudioPause", null);
@@ -204,7 +202,7 @@ public class AudioDRMPlugin extends Plugin {
 
         if (Util.SDK_INT > 23) {
             try {
-                PallyConDrmConfigration config = new PallyConDrmConfigration("USE5", "eyJkcm1fdHlwZSI6IldpZGV2aW5lIiwic2l0ZV9pZCI6IlVTRTUiLCJ1c2VyX2lkIjoie1wiY3RcIjpcIjNpclNsXC9vTkVMNmU2OFptaVdXT2xxaDBTVVhWeEtTQXErTWxiaUk3dDlnPVwiLFwiaXZcIjpcImNlMmYwNWRlMWEwYzVlYzlhZDY2NTFhOThjNDQ2MDQyXCIsXCJzXCI6XCI1ZTVmYjY5OThiNWY2NjBhXCJ9IiwiY2lkIjoiMSIsInBvbGljeSI6IkdmTmZKUGxNZWdRaDk0eDJVeklCRFJMeHI0YTJJQzlCaFgxUERDR1VNUEh5V25kRisydFUrSmxtR1FcL0VzQXo3bm1IV0tmN1NVdDFEaXkxTjdobjl4dz09IiwidGltZXN0YW1wIjoiMjAyNC0wNy0yNFQwNTo1MDowMloiLCJoYXNoIjoiNlhvdXMwQVpIbDJmcVlJZlBnRDZvWFFTVlUwK0JKNzY1eERjTWYwbWl0dz0iLCJyZXNwb25zZV9mb3JtYXQiOiJvcmlnaW5hbCIsImtleV9yb3RhdGlvbiI6ZmFsc2V9");
+                PallyConDrmConfigration config = new PallyConDrmConfigration("USE5", token);
                 ContentData content = new ContentData(audioUrl, config);
                 WVMAgent = PallyConWvSDK.createPallyConWvSDK(getContext(),content);
                 DrmSessionManager manager = WVMAgent.getDrmSessionManager();
@@ -260,43 +258,89 @@ public class AudioDRMPlugin extends Plugin {
     @PluginMethod
     public void pauseAudio(PluginCall call)
     {
-
+        if(player !=null && player.isPlaying())
+        {
+            player.pause();
+        }
+        call.resolve();
     }
 
     @PluginMethod
     public void setAudioPlaybackRate(PluginCall call)
     {
-
+        float speed = call.getFloat("speed");
+        if(player != null && String.valueOf(speed) != null )
+        {
+            PlaybackParameters playbackParameters = new PlaybackParameters(speed);
+            player.setPlaybackParameters(playbackParameters);
+        }else {
+            Toast.makeText(getContext(),"Cannot set playback rate",Toast.LENGTH_LONG).show();
+        }
     }
 
     @PluginMethod
     public void playAudio(PluginCall call)
     {
+        if(player !=null && !player.isPlaying())
+        {
+            player.play();
+        }
 
+        call.resolve();
     }
 
     @PluginMethod
     public void seekToTime(PluginCall call)
     {
-
+        var speed = call.getInt("seekTime");
+        if(player != null && String.valueOf(speed) != null)
+        {
+            player.seekTo(player.getCurrentMediaItemIndex(),speed.longValue() * 1000);
+            call.resolve();
+        }else
+        {
+            Toast.makeText(getContext(),"Seek failed due to internal error",Toast.LENGTH_LONG).show();
+        }
     }
 
     @PluginMethod
     public void stopCurrentAudio(PluginCall call)
     {
-
+        if (handler != null && runnable != null) {
+            handler.removeCallbacks(runnable);
+        }
+        if (player != null) {
+            player.release();
+        }
     }
 
     @PluginMethod
     public void getCurrentTime(PluginCall call)
     {
-
+      JSObject ret = new JSObject();
+      ret.put("time",player.getCurrentPosition()/1000);
+      call.resolve(ret);
     }
 
     @PluginMethod
     public void getPaused(PluginCall call)
     {
-
+        JSObject ret = new JSObject();
+        if(player != null)
+        {
+            if(player.isPlaying())
+            {
+                ret.put("paused",false);
+                call.resolve(ret);
+            }else
+            {
+                ret.put("paused",true);
+                call.resolve(ret);
+            }
+        }else
+        {
+            //Error
+        }
     }
 
     private DataSource.Factory buildDataSourceFactory() {
@@ -309,23 +353,5 @@ public class AudioDRMPlugin extends Plugin {
     private HttpDataSource.Factory buildHttpDataSourceFactory() {
         return new DefaultHttpDataSource.Factory()
                 .setUserAgent(Util.getUserAgent(getContext(), "Transcend"));
-    }
-
-    private boolean isScreenRecordingAppRunning(Context context) {
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> processes = activityManager.getRunningAppProcesses();
-        for (ActivityManager.RunningAppProcessInfo process : processes) {
-            if (process.processName.equals("com.google.android.media.effects")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void checkForScreenRecordingApps(Context context) {
-        if (isScreenRecordingAppRunning(context)) {
-            Toast.makeText(context, "Screen recording is detected and not allowed", Toast.LENGTH_SHORT).show();
-            getActivity().finish();
-        }
     }
 }

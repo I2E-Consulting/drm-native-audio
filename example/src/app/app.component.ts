@@ -29,8 +29,8 @@ export class AppComponent implements OnInit {
   {
     AudioDRM.loadPallyconSound(
       {
-        audioURL:"https://transcendstoredrm.blob.core.windows.net/pallycon-audio/100/hls/master.m3u8",
-        token:"eyJkcm1fdHlwZSI6IkZhaXJwbGF5Iiwic2l0ZV9pZCI6IlVTRTUiLCJ1c2VyX2lkIjoie1wiY3RcIjpcIjNpclNsXC9vTkVMNmU2OFptaVdXT2xxaDBTVVhWeEtTQXErTWxiaUk3dDlnPVwiLFwiaXZcIjpcImNlMmYwNWRlMWEwYzVlYzlhZDY2NTFhOThjNDQ2MDQyXCIsXCJzXCI6XCI1ZTVmYjY5OThiNWY2NjBhXCJ9IiwiY2lkIjoiMSIsInBvbGljeSI6IkdmTmZKUGxNZWdRaDk0eDJVeklCRFJMeHI0YTJJQzlCaFgxUERDR1VNUEh5V25kRisydFUrSmxtR1FcL0VzQXo3bm1IV0tmN1NVdDFEaXkxTjdobjl4dz09IiwidGltZXN0YW1wIjoiMjAyNC0wOC0xNFQwNToxNzo0MloiLCJoYXNoIjoibjZRajZoK1d0SzB1dzBBNWFaM1FnR0ZnKzhMcVZtdldmWmdzdzRNWHF6WT0iLCJyZXNwb25zZV9mb3JtYXQiOiJvcmlnaW5hbCIsImtleV9yb3RhdGlvbiI6ZmFsc2V9",
+        audioURL:"",
+        token:"",
         notificationThumbnail: "https://picsum.photos/200/300",
         title:"Bhagvad Gita",
         seekTime:60,
@@ -106,7 +106,7 @@ export class AppComponent implements OnInit {
   // });
 
 
-  
+
   }
 
   play(): void
@@ -123,7 +123,7 @@ export class AppComponent implements OnInit {
     AudioDRM.getCurrentTime()
  }
 
- 
+
 
 
 
