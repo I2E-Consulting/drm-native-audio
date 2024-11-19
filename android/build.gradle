@@ -51,6 +51,7 @@ repositories {
 
 dependencies {
     implementation files('libs/PallyconWVMSDK.aar')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':capacitor-android')
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
     testImplementation "junit:junit:$junitVersion"
