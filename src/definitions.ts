@@ -20,6 +20,9 @@ export interface AudioDRMPlugin {
   getCurrentTime():Promise<{time:number }>;
   removeNotificationAndClearAudio():Promise<void>;
 
+  loadAudioLecture(options: { audioURL:String, author:String, notificationThumbnail:String,title:String, seekTime:number, contentId:String }):Promise<void>;
+
+
 }
 
 
