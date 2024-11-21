@@ -367,6 +367,12 @@ public class AudioDRMPlugin extends Plugin {
     }
 
     @PluginMethod
+    public  void removeNotificationAndClearAudio(PluginCall call)
+    {
+        call.resolve();
+    }
+
+    @PluginMethod
     public void getPaused(PluginCall call)
     {
         JSObject ret = new JSObject();
