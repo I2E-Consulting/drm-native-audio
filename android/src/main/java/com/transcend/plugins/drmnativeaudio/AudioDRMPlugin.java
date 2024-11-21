@@ -3,7 +3,11 @@ package com.transcend.plugins.drmnativeaudio;
 import static android.media.AudioAttributes.ALLOW_CAPTURE_BY_NONE;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Handler;
@@ -30,6 +34,8 @@ import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.exoplayer.drm.DrmSessionManager;
 import androidx.media3.exoplayer.source.MediaSource;
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector;
+import androidx.media3.ui.PlayerNotificationManager;
+
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -59,8 +65,9 @@ public class AudioDRMPlugin extends Plugin {
     private String userAgent;
     private DataSource.Factory mediaDataSourceFactory;
 
-
-
+    @SuppressLint("UnsafeOptInUsageError")
+    private PlayerNotificationManager notificationManager;
+    private final String CHANNEL_ID = "audio_playback";
     private PallyConEventListener drmListener = new PallyConEventListener() {
         @Override
         public void onFailed(@NonNull ContentData contentData, @Nullable PallyConLicenseServerException e) {
@@ -140,7 +147,7 @@ public class AudioDRMPlugin extends Plugin {
                 notifyListeners("isBuffering",null);
             }else  if(playbackState == Player.STATE_READY)
             {
-                ret.put("soundDuration",player.getDuration()/1000);
+                ret.put("duration",player.getDuration()/1000);
                 notifyListeners("audioLoaded",ret);
 
             }
@@ -152,16 +159,16 @@ public class AudioDRMPlugin extends Plugin {
     @Override
     public void load() {
         super.load();
-        AppCompatActivity activity = getActivity();
-        activity.runOnUiThread(() -> {
-            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-            StrictMode.ThreadPolicy pol = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
-            StrictMode.setThreadPolicy(pol);
-
-            userAgent = Util.getUserAgent(getContext(), "Transcend");
-            mediaDataSourceFactory = buildDataSourceFactory();
-
-        });
+//        AppCompatActivity activity = getActivity();
+//        activity.runOnUiThread(() -> {
+//            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+//            StrictMode.ThreadPolicy pol = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
+//            StrictMode.setThreadPolicy(pol);
+//
+//            userAgent = Util.getUserAgent(getContext(), "Transcend");
+//            mediaDataSourceFactory = buildDataSourceFactory();
+//
+//        });
     }
 
     @PluginMethod
@@ -197,6 +204,8 @@ public class AudioDRMPlugin extends Plugin {
     @PluginMethod
     public void loadPallyconSound(PluginCall call)
     {
+        JSObject ret = new JSObject();
+
         String audioUrl = call.getString("audioURL");
         String token = call.getString("token");
 
@@ -210,6 +219,7 @@ public class AudioDRMPlugin extends Plugin {
                 try {
                     mediaSource = WVMAgent.getMediaSource(manager);
                     trackSelector = new DefaultTrackSelector(getContext());
+
 
                 } catch (PallyConException.ContentDataException e) {
                     e.printStackTrace();
@@ -241,12 +251,46 @@ public class AudioDRMPlugin extends Plugin {
                 player.setPlayWhenReady(true);
                 player.prepare();
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    NotificationChannel channel = new NotificationChannel(
+                            CHANNEL_ID,
+                            "Audio Playback",
+                            NotificationManager.IMPORTANCE_LOW
+                    );
+                    NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
+                    notificationManager.createNotificationChannel(channel);
+                }
 
+                notificationManager = new PlayerNotificationManager.Builder(getContext(), 1, CHANNEL_ID)
+                        .setMediaDescriptionAdapter(new PlayerNotificationManager.MediaDescriptionAdapter() {
+                            @Override
+                            public String getCurrentContentTitle(Player player) {
+                                return "Now Playing"; // Customize as needed
+                            }
 
+                            @Override
+                            public PendingIntent createCurrentContentIntent(Player player) {
+                                return null; // Add PendingIntent for app interaction
+                            }
+
+                            @Override
+                            public String getCurrentContentText(Player player) {
+                                return "Audio Content Description"; // Customize
+                            }
+
+                            @Override
+                            public Bitmap getCurrentLargeIcon(Player player, PlayerNotificationManager.BitmapCallback callback) {
+                                return null; // Add album art if available
+                            }
+                        })
+                        .build();
+
+                notificationManager.setPlayer(player);
                 startPlaybackCheck();
             }catch (Exception ex)
             {
-                Toast.makeText(getActivity(),ex.getLocalizedMessage(),Toast.LENGTH_LONG).show();
+                ret.put("message",ex.getMessage());
+                notifyListeners("playerError",ret);
             }
 
 

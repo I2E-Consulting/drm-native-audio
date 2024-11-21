@@ -30,6 +30,7 @@ npx cap sync
 * [`getPaused()`](#getpaused)
 * [`getCurrentTime()`](#getcurrenttime)
 * [`removeNotificationAndClearAudio()`](#removenotificationandclearaudio)
+* [`loadAudioLecture(...)`](#loadaudiolecture)
 * [Interfaces](#interfaces)
 
 </docgen-index>
@@ -258,6 +259,19 @@ getCurrentTime() => Promise<{ time: number; }>
 ```typescript
 removeNotificationAndClearAudio() => Promise<void>
 ```
+
+--------------------
+
+
+### loadAudioLecture(...)
+
+```typescript
+loadAudioLecture(options: { audioURL: String; author: String; notificationThumbnail: String; title: String; seekTime: number; contentId: String; }) => Promise<void>
+```
+
+| Param         | Type                                                                                                                                                                                                                                                |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`options`** | <code>{ audioURL: <a href="#string">String</a>; author: <a href="#string">String</a>; notificationThumbnail: <a href="#string">String</a>; title: <a href="#string">String</a>; seekTime: number; contentId: <a href="#string">String</a>; }</code> |
 
 --------------------
 
