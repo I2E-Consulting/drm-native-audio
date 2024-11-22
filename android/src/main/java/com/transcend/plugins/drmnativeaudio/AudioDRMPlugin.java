@@ -250,6 +250,7 @@ public class AudioDRMPlugin extends Plugin {
                 player.setAudioAttributes(audioAttributes,true);
                 player.setPlayWhenReady(true);
                 player.prepare();
+                startPlaybackCheck();
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     NotificationChannel channel = new NotificationChannel(
