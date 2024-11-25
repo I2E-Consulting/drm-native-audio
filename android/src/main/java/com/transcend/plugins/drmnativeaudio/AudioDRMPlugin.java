@@ -2,40 +2,28 @@ package com.transcend.plugins.drmnativeaudio;
 
 import static android.media.AudioAttributes.ALLOW_CAPTURE_BY_NONE;
 import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Handler;
-import android.os.StrictMode;
-import android.view.WindowManager;
+import android.os.PowerManager;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.OptIn;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.media3.common.AudioAttributes;
 import androidx.media3.common.C;
 import androidx.media3.common.PlaybackException;
 import androidx.media3.common.PlaybackParameters;
 import androidx.media3.common.Player;
-import androidx.media3.common.util.UnstableApi;
 import androidx.media3.common.util.Util;
-import androidx.media3.datasource.DataSource;
-import androidx.media3.datasource.DefaultDataSource;
-import androidx.media3.datasource.DefaultHttpDataSource;
-import androidx.media3.datasource.HttpDataSource;
 import androidx.media3.exoplayer.ExoPlaybackException;
 import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.exoplayer.drm.DrmSessionManager;
 import androidx.media3.exoplayer.source.MediaSource;
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector;
-import androidx.media3.ui.PlayerNotificationManager;
-
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -47,7 +35,6 @@ import com.pallycon.widevine.model.ContentData;
 import com.pallycon.widevine.model.PallyConDrmConfigration;
 import com.pallycon.widevine.model.PallyConEventListener;
 import com.pallycon.widevine.sdk.PallyConWvSDK;
-import java.util.List;
 
 
 @CapacitorPlugin(name = "AudioDRM")
@@ -62,12 +49,8 @@ public class AudioDRMPlugin extends Plugin {
     private final AudioDRM implementation = new AudioDRM();
     PallyConWvSDK WVMAgent = null;
     private ExoPlayer player;
-    private String userAgent;
-    private DataSource.Factory mediaDataSourceFactory;
 
     @SuppressLint("UnsafeOptInUsageError")
-    private PlayerNotificationManager notificationManager;
-    private final String CHANNEL_ID = "audio_playback";
     private PallyConEventListener drmListener = new PallyConEventListener() {
         @Override
         public void onFailed(@NonNull ContentData contentData, @Nullable PallyConLicenseServerException e) {
@@ -114,6 +97,9 @@ public class AudioDRMPlugin extends Plugin {
         }
     };
 
+    private PowerManager.WakeLock wakeLock;
+
+
     @SuppressLint("UnsafeOptInUsageError")
     Player.Listener playerEventListener = new Player.Listener() {
 
@@ -142,6 +128,7 @@ public class AudioDRMPlugin extends Plugin {
             if(playbackState == Player.STATE_ENDED)
             {
                 notifyListeners("soundEnded",null);
+                System.out.println("soundEnded");
             }else if (playbackState == Player.STATE_BUFFERING)
             {
                 notifyListeners("isBuffering",null);
@@ -159,17 +146,41 @@ public class AudioDRMPlugin extends Plugin {
     @Override
     public void load() {
         super.load();
-//        AppCompatActivity activity = getActivity();
-//        activity.runOnUiThread(() -> {
-//            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-//            StrictMode.ThreadPolicy pol = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
-//            StrictMode.setThreadPolicy(pol);
-//
-//            userAgent = Util.getUserAgent(getContext(), "Transcend");
-//            mediaDataSourceFactory = buildDataSourceFactory();
-//
-//        });
+        PowerManager powerManager = (PowerManager) getContext().getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "AudioDRMPlugin::WakeLock");
+        wakeLock.acquire();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel();
+        }
     }
+
+    private void startForegroundService() {
+        Intent serviceIntent = new Intent(getContext(), AudioPlaybackService.class);
+        getContext().startService(serviceIntent);
+    }
+
+    private void createNotificationChannel() {
+        NotificationChannel channel = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            channel = new NotificationChannel(
+                    "audio_playback",
+                    "Audio Playback",
+                    NotificationManager.IMPORTANCE_LOW
+            );
+        }
+        NotificationManager notificationManager = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            notificationManager = getContext().getSystemService(NotificationManager.class);
+            if (notificationManager != null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    notificationManager.createNotificationChannel(channel);
+                }
+            }
+        }
+
+    }
+
 
     @PluginMethod
     public void echo(PluginCall call) {
@@ -208,6 +219,11 @@ public class AudioDRMPlugin extends Plugin {
 
         String audioUrl = call.getString("audioURL");
         String token = call.getString("token");
+
+        if (audioUrl == null || token == null) {
+            call.reject("Invalid arguments: audioURL and token are required");
+            return;
+        }
 
         if (Util.SDK_INT > 23) {
             try {
@@ -251,43 +267,44 @@ public class AudioDRMPlugin extends Plugin {
                 player.setPlayWhenReady(true);
                 player.prepare();
                 startPlaybackCheck();
+                startForegroundService();
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    NotificationChannel channel = new NotificationChannel(
-                            CHANNEL_ID,
-                            "Audio Playback",
-                            NotificationManager.IMPORTANCE_LOW
-                    );
-                    NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
-                    notificationManager.createNotificationChannel(channel);
-                }
-
-                notificationManager = new PlayerNotificationManager.Builder(getContext(), 1, CHANNEL_ID)
-                        .setMediaDescriptionAdapter(new PlayerNotificationManager.MediaDescriptionAdapter() {
-                            @Override
-                            public String getCurrentContentTitle(Player player) {
-                                return "Now Playing"; // Customize as needed
-                            }
-
-                            @Override
-                            public PendingIntent createCurrentContentIntent(Player player) {
-                                return null; // Add PendingIntent for app interaction
-                            }
-
-                            @Override
-                            public String getCurrentContentText(Player player) {
-                                return "Audio Content Description"; // Customize
-                            }
-
-                            @Override
-                            public Bitmap getCurrentLargeIcon(Player player, PlayerNotificationManager.BitmapCallback callback) {
-                                return null; // Add album art if available
-                            }
-                        })
-                        .build();
-
-                notificationManager.setPlayer(player);
-                startPlaybackCheck();
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                    NotificationChannel channel = new NotificationChannel(
+//                            CHANNEL_ID,
+//                            "Audio Playback",
+//                            NotificationManager.IMPORTANCE_LOW
+//                    );
+//                    NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
+//                    notificationManager.createNotificationChannel(channel);
+//                }
+//
+//                notificationManager = new PlayerNotificationManager.Builder(getContext(), 1, CHANNEL_ID)
+//                        .setMediaDescriptionAdapter(new PlayerNotificationManager.MediaDescriptionAdapter() {
+//                            @Override
+//                            public String getCurrentContentTitle(Player player) {
+//                                return "Now Playing";
+//                            }
+//
+//                            @Override
+//                            public PendingIntent createCurrentContentIntent(Player player) {
+//                                return null;
+//                            }
+//
+//                            @Override
+//                            public String getCurrentContentText(Player player) {
+//                                return "Audio Content Description";
+//                            }
+//
+//                            @Override
+//                            public Bitmap getCurrentLargeIcon(Player player, PlayerNotificationManager.BitmapCallback callback) {
+//                                return null;
+//                            }
+//                        })
+//                        .build();
+//                notificationManager.setPlayer(player);
+//                startPlaybackCheck();
+                call.resolve();
             }catch (Exception ex)
             {
                 ret.put("message",ex.getMessage());
@@ -306,8 +323,9 @@ public class AudioDRMPlugin extends Plugin {
         if(player !=null && player.isPlaying())
         {
             player.pause();
+            call.resolve();
         }
-        call.resolve();
+
     }
 
     @PluginMethod
@@ -329,9 +347,8 @@ public class AudioDRMPlugin extends Plugin {
         if(player !=null && !player.isPlaying())
         {
             player.play();
+            call.resolve();
         }
-
-        call.resolve();
     }
 
     @PluginMethod
@@ -345,6 +362,7 @@ public class AudioDRMPlugin extends Plugin {
         }else
         {
             Toast.makeText(getContext(),"Seek failed due to internal error",Toast.LENGTH_LONG).show();
+            call.reject("Player is not initialised");
         }
     }
 
@@ -357,6 +375,12 @@ public class AudioDRMPlugin extends Plugin {
         if (player != null) {
             player.release();
         }
+
+        if (wakeLock.isHeld()) {
+            wakeLock.release();
+        }
+
+        call.resolve();
     }
 
     @PluginMethod
@@ -390,19 +414,8 @@ public class AudioDRMPlugin extends Plugin {
             }
         }else
         {
-            //Error
+            call.reject("Player is not initialised");
         }
     }
 
-    private DataSource.Factory buildDataSourceFactory() {
-        HttpDataSource.Factory httpDataSourceFactory = buildHttpDataSourceFactory();
-
-        return new DefaultDataSource.Factory(getContext(), httpDataSourceFactory);
-    }
-
-    @OptIn(markerClass = UnstableApi.class)
-    private HttpDataSource.Factory buildHttpDataSourceFactory() {
-        return new DefaultHttpDataSource.Factory()
-                .setUserAgent(Util.getUserAgent(getContext(), "Transcend"));
-    }
 }
