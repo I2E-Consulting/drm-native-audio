@@ -157,7 +157,11 @@ public class AudioDRMPlugin extends Plugin {
 
     private void startForegroundService() {
         Intent serviceIntent = new Intent(getContext(), AudioPlaybackService.class);
-        getContext().startService(serviceIntent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            getContext().startForegroundService(serviceIntent);
+        } else {
+            getContext().startService(serviceIntent);
+        }
     }
 
     private void createNotificationChannel() {
@@ -190,6 +194,8 @@ public class AudioDRMPlugin extends Plugin {
         ret.put("value", implementation.echo(value));
         call.resolve(ret);
     }
+
+
 
     public void startPlaybackCheck()
     {
