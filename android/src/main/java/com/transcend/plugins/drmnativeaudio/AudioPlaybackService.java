@@ -7,9 +7,20 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import com.getcapacitor.JSObject;
 
 public class AudioPlaybackService extends Service {
+
+    private void notifyPlugin(String eventName, @Nullable JSObject data) {
+        Intent intent = new Intent(this, AudioEventReceiver.class); // Explicit target
+        intent.setAction("com.transcend.plugins.drmnativeaudio." + eventName);
+        if (data != null) {
+            intent.putExtra("data", data.toString());
+        }
+        sendBroadcast(intent);
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -21,9 +32,10 @@ public class AudioPlaybackService extends Service {
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .build();
 
-        startForeground(1, notification); // Start the service in the foreground with the notification
+        startForeground(1, notification);
 
-        // Your playback logic here
+        // Example of sending an event
+        notifyPlugin("isAudioPlaying", null);
 
         return START_NOT_STICKY;
     }

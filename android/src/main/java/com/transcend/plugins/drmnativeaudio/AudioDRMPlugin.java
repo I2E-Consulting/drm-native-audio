@@ -4,8 +4,10 @@ import static android.media.AudioAttributes.ALLOW_CAPTURE_BY_NONE;
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Handler;
@@ -35,6 +37,8 @@ import com.pallycon.widevine.model.ContentData;
 import com.pallycon.widevine.model.PallyConDrmConfigration;
 import com.pallycon.widevine.model.PallyConEventListener;
 import com.pallycon.widevine.sdk.PallyConWvSDK;
+
+import org.json.JSONException;
 
 
 @CapacitorPlugin(name = "AudioDRM")
@@ -99,6 +103,27 @@ public class AudioDRMPlugin extends Plugin {
 
     private PowerManager.WakeLock wakeLock;
 
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(action != null)
+            {
+                JSObject data = new JSObject();
+                String eventData = intent.getStringExtra("data");
+                if (eventData != null) {
+                    try {
+                        data = new JSObject(eventData);
+                    } catch (JSONException e) {
+                        data.put("message",e.getLocalizedMessage());
+                        notifyListeners("playerError",data);
+                    }
+                }
+                notifyListeners(action, data);
+            }
+        }
+    };
+
 
     @SuppressLint("UnsafeOptInUsageError")
     Player.Listener playerEventListener = new Player.Listener() {
@@ -153,6 +178,25 @@ public class AudioDRMPlugin extends Plugin {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel();
         }
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.transcend.plugins.drmnativeaudio.isAudioPlaying");
+        filter.addAction("com.transcend.plugins.drmnativeaudio.isAudioPause");
+        filter.addAction("com.transcend.plugins.drmnativeaudio.playerError");
+        filter.addAction("com.transcend.plugins.drmnativeaudio.soundEnded");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            getContext().registerReceiver(receiver,filter, Context.RECEIVER_NOT_EXPORTED);
+        }
+    }
+
+    @Override
+    protected void handleOnDestroy() {
+        super.handleOnDestroy();
+        if (handler != null && runnable != null) {
+            handler.removeCallbacks(runnable);
+        }
+        getContext().unregisterReceiver(receiver);
     }
 
     private void startForegroundService() {
@@ -165,21 +209,15 @@ public class AudioDRMPlugin extends Plugin {
     }
 
     private void createNotificationChannel() {
-        NotificationChannel channel = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            channel = new NotificationChannel(
+            NotificationChannel channel = new NotificationChannel(
                     "audio_playback",
                     "Audio Playback",
                     NotificationManager.IMPORTANCE_LOW
             );
-        }
-        NotificationManager notificationManager = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            notificationManager = getContext().getSystemService(NotificationManager.class);
+            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
             if (notificationManager != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    notificationManager.createNotificationChannel(channel);
-                }
+                notificationManager.createNotificationChannel(channel);
             }
         }
 
@@ -244,9 +282,11 @@ public class AudioDRMPlugin extends Plugin {
 
 
                 } catch (PallyConException.ContentDataException e) {
+                    System.out.println("285:"+e.getLocalizedMessage());
                     e.printStackTrace();
                     return;
                 } catch (PallyConException.DetectedDeviceTimeModifiedException e) {
+                    System.out.println("285:"+e.getLocalizedMessage());
                     e.printStackTrace();
                     return;
                 }
@@ -274,45 +314,10 @@ public class AudioDRMPlugin extends Plugin {
                 player.prepare();
                 startPlaybackCheck();
                 startForegroundService();
-
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                    NotificationChannel channel = new NotificationChannel(
-//                            CHANNEL_ID,
-//                            "Audio Playback",
-//                            NotificationManager.IMPORTANCE_LOW
-//                    );
-//                    NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
-//                    notificationManager.createNotificationChannel(channel);
-//                }
-//
-//                notificationManager = new PlayerNotificationManager.Builder(getContext(), 1, CHANNEL_ID)
-//                        .setMediaDescriptionAdapter(new PlayerNotificationManager.MediaDescriptionAdapter() {
-//                            @Override
-//                            public String getCurrentContentTitle(Player player) {
-//                                return "Now Playing";
-//                            }
-//
-//                            @Override
-//                            public PendingIntent createCurrentContentIntent(Player player) {
-//                                return null;
-//                            }
-//
-//                            @Override
-//                            public String getCurrentContentText(Player player) {
-//                                return "Audio Content Description";
-//                            }
-//
-//                            @Override
-//                            public Bitmap getCurrentLargeIcon(Player player, PlayerNotificationManager.BitmapCallback callback) {
-//                                return null;
-//                            }
-//                        })
-//                        .build();
-//                notificationManager.setPlayer(player);
-//                startPlaybackCheck();
                 call.resolve();
             }catch (Exception ex)
             {
+                System.out.println("320:"+ex.getLocalizedMessage());
                 ret.put("message",ex.getMessage());
                 notifyListeners("playerError",ret);
             }
@@ -342,7 +347,9 @@ public class AudioDRMPlugin extends Plugin {
         {
             PlaybackParameters playbackParameters = new PlaybackParameters(speed);
             player.setPlaybackParameters(playbackParameters);
+            call.resolve();
         }else {
+            call.reject("Cannot set playback rate");
             Toast.makeText(getContext(),"Cannot set playback rate",Toast.LENGTH_LONG).show();
         }
     }

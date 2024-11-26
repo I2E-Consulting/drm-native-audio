@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
       AudioDRM.loadPallyconSound(
         {
           audioURL:"https://bbtassets.blob.core.windows.net/pallycon-audio-test/100/dash/stream.mpd",
-          token:"eyJkcm1fdHlwZSI6IldpZGV2aW5lIiwic2l0ZV9pZCI6IlVTRTUiLCJ1c2VyX2lkIjoiMiIsImNpZCI6IjEiLCJwb2xpY3kiOiJHZk5mSlBsTWVnUWg5NHgyVXpJQkRSTHhyNGEySUM5QmhYMVBEQ0dVTVBIeVduZEYrMnRVK0psbUdRXC9Fc0F6N25tSFdLZjdTVXQxRGl5MU43aG45eHc9PSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMjVUMDM6MDE6MThaIiwiaGFzaCI6Ik5mXC9TNzlhQlwvNFJJMnRSV2lBbFBZZ3gybnkxOUN6aW02T0RJK1VPamlsdz0iLCJyZXNwb25zZV9mb3JtYXQiOiJvcmlnaW5hbCIsImtleV9yb3RhdGlvbiI6ZmFsc2V9",
+          token:"eyJkcm1fdHlwZSI6IldpZGV2aW5lIiwic2l0ZV9pZCI6IlVTRTUiLCJ1c2VyX2lkIjoiMiIsImNpZCI6IjEiLCJwb2xpY3kiOiJHZk5mSlBsTWVnUWg5NHgyVXpJQkRSTHhyNGEySUM5QmhYMVBEQ0dVTVBIeVduZEYrMnRVK0psbUdRXC9Fc0F6N25tSFdLZjdTVXQxRGl5MU43aG45eHc9PSIsInRpbWVzdGFtcCI6IjIwMjQtMTEtMjZUMDM6MzA6NThaIiwiaGFzaCI6InBSdVJ3VktEWmNWSEVzSENobTBGM1MydHVBQUpHVlwvM1FYdVwvbjBPZUIzTT0iLCJyZXNwb25zZV9mb3JtYXQiOiJvcmlnaW5hbCIsImtleV9yb3RhdGlvbiI6ZmFsc2V9",
           notificationThumbnail: "https://picsum.photos/200/300",
           title:"Bhagvad Gita",
           seekTime:60,
