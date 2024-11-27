@@ -33,7 +33,8 @@ public class AudioPlaybackService extends Service {
         Notification notification = new NotificationCompat.Builder(this, "audio_playback")
                 .setContentTitle("Playing Audio")
                 .setContentText("Your audio is playing.")
-                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setSmallIcon(R.drawable.transcend_logo_background)
                 .build();
 
         startForeground(1, notification);
