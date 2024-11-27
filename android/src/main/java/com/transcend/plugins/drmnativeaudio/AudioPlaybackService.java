@@ -5,21 +5,25 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
-import androidx.annotation.Nullable;
+
 import androidx.core.app.NotificationCompat;
-import com.getcapacitor.JSObject;
 
 public class AudioPlaybackService extends Service {
 
-    private void notifyPlugin(String eventName, @Nullable JSObject data) {
-        Intent intent = new Intent(this, AudioEventReceiver.class); // Explicit target
-        intent.setAction("com.transcend.plugins.drmnativeaudio." + eventName);
-        if (data != null) {
-            intent.putExtra("data", data.toString());
+    private final IBinder binder = new LocalBinder();
+
+    public class LocalBinder extends Binder {
+        AudioPlaybackService getService() {
+            return AudioPlaybackService.this;
         }
-        sendBroadcast(intent);
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return binder;
     }
 
     @Override
@@ -33,11 +37,7 @@ public class AudioPlaybackService extends Service {
                 .build();
 
         startForeground(1, notification);
-
-        // Example of sending an event
-        notifyPlugin("isAudioPlaying", null);
-
-        return START_NOT_STICKY;
+        return START_STICKY;
     }
 
     private void createNotificationChannel() {
@@ -52,10 +52,5 @@ public class AudioPlaybackService extends Service {
                 manager.createNotificationChannel(channel);
             }
         }
-    }
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
     }
 }

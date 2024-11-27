@@ -4,13 +4,13 @@ import static android.media.AudioAttributes.ALLOW_CAPTURE_BY_NONE;
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.PowerManager;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -37,9 +37,7 @@ import com.pallycon.widevine.model.ContentData;
 import com.pallycon.widevine.model.PallyConDrmConfigration;
 import com.pallycon.widevine.model.PallyConEventListener;
 import com.pallycon.widevine.sdk.PallyConWvSDK;
-
-import org.json.JSONException;
-
+import android.content.ServiceConnection;
 
 @CapacitorPlugin(name = "AudioDRM")
 
@@ -53,6 +51,10 @@ public class AudioDRMPlugin extends Plugin {
     private final AudioDRM implementation = new AudioDRM();
     PallyConWvSDK WVMAgent = null;
     private ExoPlayer player;
+    private AudioPlaybackService playbackService;
+    private boolean isBound = false;
+
+
 
     @SuppressLint("UnsafeOptInUsageError")
     private PallyConEventListener drmListener = new PallyConEventListener() {
@@ -103,32 +105,28 @@ public class AudioDRMPlugin extends Plugin {
 
     private PowerManager.WakeLock wakeLock;
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
+    private final ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if(action != null)
-            {
-                JSObject data = new JSObject();
-                String eventData = intent.getStringExtra("data");
-                if (eventData != null) {
-                    try {
-                        data = new JSObject(eventData);
-                    } catch (JSONException e) {
-                        data.put("message",e.getLocalizedMessage());
-                        notifyListeners("playerError",data);
-                    }
-                }
-                notifyListeners(action, data);
-            }
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            AudioPlaybackService.LocalBinder binder = (AudioPlaybackService.LocalBinder) iBinder;
+            playbackService = binder.getService();
+            isBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            isBound = false;
+            playbackService = null;
         }
     };
+
 
 
     @SuppressLint("UnsafeOptInUsageError")
     Player.Listener playerEventListener = new Player.Listener() {
 
         JSObject ret = new JSObject();
+
         @Override
         public void onPlayerError(PlaybackException error) {
             if (error.errorCode == ExoPlaybackException.TYPE_RENDERER) {
@@ -174,29 +172,31 @@ public class AudioDRMPlugin extends Plugin {
         PowerManager powerManager = (PowerManager) getContext().getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "AudioDRMPlugin::WakeLock");
         wakeLock.acquire();
+        Intent intent = new Intent(getContext(), AudioPlaybackService.class);
+        getContext().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+    }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            createNotificationChannel();
+    private void releaseResources() {
+        if (player != null) {
+            player.release();
+            player = null;
+        }
+        if (wakeLock != null && wakeLock.isHeld()) {
+            wakeLock.release();
+        }
+        if (isBound) {
+            getContext().unbindService(serviceConnection);
         }
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("com.transcend.plugins.drmnativeaudio.isAudioPlaying");
-        filter.addAction("com.transcend.plugins.drmnativeaudio.isAudioPause");
-        filter.addAction("com.transcend.plugins.drmnativeaudio.playerError");
-        filter.addAction("com.transcend.plugins.drmnativeaudio.soundEnded");
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            getContext().registerReceiver(receiver,filter, Context.RECEIVER_NOT_EXPORTED);
+        if (handler != null && runnable != null) {
+            handler.removeCallbacks(runnable);
         }
     }
 
     @Override
     protected void handleOnDestroy() {
         super.handleOnDestroy();
-        if (handler != null && runnable != null) {
-            handler.removeCallbacks(runnable);
-        }
-        getContext().unregisterReceiver(receiver);
+        releaseResources();
     }
 
     private void startForegroundService() {
@@ -249,7 +249,7 @@ public class AudioDRMPlugin extends Plugin {
                         notifyListeners("isAudioPlaying", null);
                     }
                 }
-                handler.postDelayed(this, 1000);
+                handler.postDelayed(this, 2000);
             }
         };
         handler.post(runnable);

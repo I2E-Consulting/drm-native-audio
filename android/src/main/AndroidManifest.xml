@@ -2,16 +2,6 @@
 
     <application>
         <service android:name=".AudioPlaybackService" android:foregroundServiceType="mediaPlayback" android:exported="false"/>
-        <receiver android:name=".AudioEventReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.transcend.plugins.drmnativeaudio.soundEnded" />
-                <action android:name="com.transcend.plugins.drmnativeaudio.audioLoaded" />
-                <action android:name="com.transcend.plugins.drmnativeaudio.isAudioPlaying" />
-                <action android:name="com.transcend.plugins.drmnativeaudio.isAudioPause" />
-                <action android:name="com.transcend.plugins.drmnativeaudio.playerError" />
-            </intent-filter>
-        </receiver>
     </application>
 
 
