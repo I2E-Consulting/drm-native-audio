@@ -273,7 +273,8 @@ public class AudioDRMPlugin extends Plugin {
             try {
                 PallyConDrmConfigration config = new PallyConDrmConfigration("USE5", token);
                 ContentData content = new ContentData(audioUrl, config);
-                WVMAgent = PallyConWvSDK.createPallyConWvSDK(getContext(),content);
+                WVMAgent = PallyConWvSDK.Companion.createPallyConWvSDK(getContext(),content);
+                //WVMAgent = PallyConWvSDK.createPallyConWvSDK(getContext(),content);
                 DrmSessionManager manager = WVMAgent.getDrmSessionManager();
                 WVMAgent.setPallyConEventListener(drmListener);
                 try {
