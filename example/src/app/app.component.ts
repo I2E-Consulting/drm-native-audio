@@ -119,10 +119,20 @@ export class AppComponent implements OnInit {
   //  AudioDRM.addListener('playerError', (error) => {
   //   console.error('AVPlayer Error:', error);
   // });
-
-
-
   }
+
+  loadAudioLecture(): void
+  {
+    AudioDRM.loadAudioLecture({
+      audioURL: "https://transcendstoredrm.blob.core.windows.net/sp-lectures/SP_BG_01-11-12_London_1973-07-13_Wanting_to_Be_Cheated/SP_BG_01-11-12_London_1973-07-13_Wanting_to_Be_Cheated.m3u8",
+      author: "Author",
+      notificationThumbnail: "undefined",
+      title: "undefined",
+      seekTime: 0,
+      contentId: "undefined"
+    });
+  }
+
 
   play(): void
   {

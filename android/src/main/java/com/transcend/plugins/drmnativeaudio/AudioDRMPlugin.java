@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -17,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.media3.common.AudioAttributes;
 import androidx.media3.common.C;
+import androidx.media3.common.MediaItem;
+import androidx.media3.common.MimeTypes;
 import androidx.media3.common.PlaybackException;
 import androidx.media3.common.PlaybackParameters;
 import androidx.media3.common.Player;
@@ -120,8 +123,6 @@ public class AudioDRMPlugin extends Plugin {
         }
     };
 
-
-
     @SuppressLint("UnsafeOptInUsageError")
     Player.Listener playerEventListener = new Player.Listener() {
 
@@ -223,7 +224,6 @@ public class AudioDRMPlugin extends Plugin {
 
     }
 
-
     @PluginMethod
     public void echo(PluginCall call) {
         String value = call.getString("value");
@@ -232,8 +232,6 @@ public class AudioDRMPlugin extends Plugin {
         ret.put("value", implementation.echo(value));
         call.resolve(ret);
     }
-
-
 
     public void startPlaybackCheck()
     {
@@ -431,5 +429,39 @@ public class AudioDRMPlugin extends Plugin {
             call.reject("Player is not initialised");
         }
     }
+
+    //  loadAudioLecture(options: { audioURL:String, author:String, notificationThumbnail:String,title:String, seekTime:number, contentId:String }):Promise<void>;
+
+    @PluginMethod
+    public  void loadAudioLecture(PluginCall call)
+    {
+        JSObject ret = new JSObject();
+        String audioUrl = call.getString("audioURL");
+
+        try
+        {
+            if (player != null) {
+                player.release();
+            }
+
+            Uri uri = Uri.parse(audioUrl);
+            player = new ExoPlayer.Builder(getActivity().getApplicationContext()).build();
+            MediaItem mediaItem = new MediaItem.Builder().setUri(uri).setMimeType(MimeTypes.APPLICATION_M3U8).build();
+            player.setMediaItem(mediaItem);
+            if (player.isPlaying()) {
+                player.stop();
+            }
+            player.prepare();
+            player.play();
+            startPlaybackCheck();
+
+            call.resolve();
+        }catch (Exception exception)
+        {
+            notifyListeners(exception.getMessage(),ret);
+            call.reject(exception.getMessage());
+        }
+    }
+
 
 }
