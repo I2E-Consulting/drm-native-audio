@@ -247,7 +247,7 @@ public class AudioDRMPlugin extends Plugin {
                         notifyListeners("isAudioPlaying", null);
                     }
                 }
-                handler.postDelayed(this, 2000);
+                handler.postDelayed(this, 1000);
             }
         };
         handler.post(runnable);
@@ -453,6 +453,8 @@ public class AudioDRMPlugin extends Plugin {
             }
             player.prepare();
             player.play();
+            player.addListener(playerEventListener);
+
             startPlaybackCheck();
 
             call.resolve();
