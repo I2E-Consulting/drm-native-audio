@@ -11,14 +11,23 @@ import AVKit
 
 class AVPlayerConfiguration
 {
-    static let sharedInstance = AVPlayerConfiguration()
+    static let sharedInstance: AVPlayerConfiguration = {
+            DispatchQueue.main.sync {
+                return AVPlayerConfiguration()
+            }
+        }()
+
     let controller = AVPlayerViewController()
     var player: AVPlayer = AVPlayer()
     
     func setPlayerWithURL()
     {
-        player.actionAtItemEnd = .none
-        controller.player = player
+        DispatchQueue.main.async
+        { [self] in
+            player.actionAtItemEnd = .none
+            controller.player = player
+        }
+        
         
     }
 }
