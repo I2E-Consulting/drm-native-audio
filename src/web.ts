@@ -4,10 +4,7 @@ import type { AudioDRMPlugin } from './definitions';
 export class AudioDRMWeb extends WebPlugin implements AudioDRMPlugin {
   
   constructor() {
-    super({
-      name: 'AudioDRM',
-      platforms: ['web'],
-    });
+    super();
   }
 
   async loadAudioLecture(): Promise<void> {
