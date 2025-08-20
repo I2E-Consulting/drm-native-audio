@@ -29,8 +29,8 @@ export class AppComponent implements OnInit {
   {
     AudioDRM.loadPallyconSound(
       {
-        audioURL:"https://bbtassets.blob.core.windows.net/sample-audio-assets/10/audio.m3u8",
-        token:"",
+        audioURL:"https://bbtassets.blob.core.windows.net/pallycon-audio-test/8344/hls/master.m3u8",
+        token:"eyJkcm1fdHlwZSI6IkZhaXJwbGF5Iiwic2l0ZV9pZCI6IlVTRTUiLCJ1c2VyX2lkIjoiMiIsImNpZCI6IjEiLCJwb2xpY3kiOiJHZk5mSlBsTWVnUWg5NHgyVXpJQkRSTHhyNGEySUM5QmhYMVBEQ0dVTVBIeVduZEYrMnRVK0psbUdRXC9Fc0F6N25tSFdLZjdTVXQxRGl5MU43aG45eHc9PSIsInRpbWVzdGFtcCI6IjIwMjUtMDgtMjBUMTA6MDA6MTBaIiwiaGFzaCI6IndQUGtqK1YyWDBZalk4R1hKYVVmd3NnbFwvYXgrVUZRM093Nm1ibnFLY25rPSIsInJlc3BvbnNlX2Zvcm1hdCI6Im9yaWdpbmFsIiwia2V5X3JvdGF0aW9uIjpmYWxzZX0=",
         notificationThumbnail: "https://picsum.photos/200/300",
         title:"Bhagvad Gita",
         seekTime:0,
