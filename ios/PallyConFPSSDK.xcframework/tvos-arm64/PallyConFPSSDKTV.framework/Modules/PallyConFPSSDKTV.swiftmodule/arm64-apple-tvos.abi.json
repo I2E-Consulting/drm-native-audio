@@ -1,8 +1,8 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "TopLevel",
-    "printedName": "TopLevel",
+    "name": "PallyConFPSSDKTV",
+    "printedName": "PallyConFPSSDKTV",
     "children": [
       {
         "kind": "Import",
@@ -251,6 +251,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -334,6 +348,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -631,6 +659,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -939,6 +981,20 @@
         ],
         "enumRawTypeName": "Int64",
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -1817,6 +1873,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -1921,6 +1991,16 @@
         "kind": "Import",
         "name": "UIKit",
         "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "PallyConFPSSDKTV",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
         "declKind": "Import",
         "moduleName": "PallyConFPSSDKTV",
         "declAttributes": [
@@ -2203,7 +2283,23 @@
           "AccessControl",
           "Final"
         ],
-        "hasMissingDesignatedInitializers": true
+        "hasMissingDesignatedInitializers": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
       },
       {
         "kind": "Import",
@@ -2731,141 +2827,6 @@
           },
           {
             "kind": "Var",
-            "name": "keyIdList",
-            "printedName": "keyIdList",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "[Swift.String]?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Array",
-                    "printedName": "[Swift.String]",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
-                      }
-                    ],
-                    "usr": "s:Sa"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:16PallyConFPSSDKTV0aB16DrmConfigurationC9keyIdListSaySSGSgvp",
-            "mangledName": "$s16PallyConFPSSDKTV0aB16DrmConfigurationC9keyIdListSaySSGSgvp",
-            "moduleName": "PallyConFPSSDKTV",
-            "declAttributes": [
-              "HasInitialValue",
-              "HasStorage",
-              "AccessControl",
-              "RawDocComment"
-            ],
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "[Swift.String]?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Array",
-                        "printedName": "[Swift.String]",
-                        "children": [
-                          {
-                            "kind": "TypeNominal",
-                            "name": "String",
-                            "printedName": "Swift.String",
-                            "usr": "s:SS"
-                          }
-                        ],
-                        "usr": "s:Sa"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:16PallyConFPSSDKTV0aB16DrmConfigurationC9keyIdListSaySSGSgvg",
-                "mangledName": "$s16PallyConFPSSDKTV0aB16DrmConfigurationC9keyIdListSaySSGSgvg",
-                "moduleName": "PallyConFPSSDKTV",
-                "implicit": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "[Swift.String]?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Array",
-                        "printedName": "[Swift.String]",
-                        "children": [
-                          {
-                            "kind": "TypeNominal",
-                            "name": "String",
-                            "printedName": "Swift.String",
-                            "usr": "s:SS"
-                          }
-                        ],
-                        "usr": "s:Sa"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:16PallyConFPSSDKTV0aB16DrmConfigurationC9keyIdListSaySSGSgvs",
-                "mangledName": "$s16PallyConFPSSDKTV0aB16DrmConfigurationC9keyIdListSaySSGSgvs",
-                "moduleName": "PallyConFPSSDKTV",
-                "implicit": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:16PallyConFPSSDKTV0aB16DrmConfigurationC9keyIdListSaySSGSgvM",
-                "mangledName": "$s16PallyConFPSSDKTV0aB16DrmConfigurationC9keyIdListSaySSGSgvM",
-                "moduleName": "PallyConFPSSDKTV",
-                "implicit": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
             "name": "licenseHttpHeader",
             "printedName": "licenseHttpHeader",
             "children": [
@@ -3130,93 +3091,6 @@
           },
           {
             "kind": "Var",
-            "name": "allowsKeyRotation",
-            "printedName": "allowsKeyRotation",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:16PallyConFPSSDKTV0aB16DrmConfigurationC17allowsKeyRotationSbvp",
-            "mangledName": "$s16PallyConFPSSDKTV0aB16DrmConfigurationC17allowsKeyRotationSbvp",
-            "moduleName": "PallyConFPSSDKTV",
-            "declAttributes": [
-              "HasInitialValue",
-              "HasStorage",
-              "AccessControl",
-              "RawDocComment"
-            ],
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:16PallyConFPSSDKTV0aB16DrmConfigurationC17allowsKeyRotationSbvg",
-                "mangledName": "$s16PallyConFPSSDKTV0aB16DrmConfigurationC17allowsKeyRotationSbvg",
-                "moduleName": "PallyConFPSSDKTV",
-                "implicit": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:16PallyConFPSSDKTV0aB16DrmConfigurationC17allowsKeyRotationSbvs",
-                "mangledName": "$s16PallyConFPSSDKTV0aB16DrmConfigurationC17allowsKeyRotationSbvs",
-                "moduleName": "PallyConFPSSDKTV",
-                "implicit": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:16PallyConFPSSDKTV0aB16DrmConfigurationC17allowsKeyRotationSbvM",
-                "mangledName": "$s16PallyConFPSSDKTV0aB16DrmConfigurationC17allowsKeyRotationSbvM",
-                "moduleName": "PallyConFPSSDKTV",
-                "implicit": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
             "name": "renewalInterval",
             "printedName": "renewalInterval",
             "children": [
@@ -3305,7 +3179,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(avURLAsset:contentId:certificateUrl:authData:delegate:licenseUrl:keyIdList:licenseHttpHeader:licenseCookies:allowsKeyRotation:renewalInterval:)",
+            "printedName": "init(avURLAsset:contentId:certificateUrl:authData:delegate:licenseUrl:licenseHttpHeader:licenseCookies:renewalInterval:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -3379,29 +3253,6 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "[Swift.String]?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Array",
-                    "printedName": "[Swift.String]",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
-                      }
-                    ],
-                    "usr": "s:Sa"
-                  }
-                ],
-                "hasDefaultArg": true,
-                "usr": "s:Sq"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
                 "printedName": "[Swift.String : Swift.String]?",
                 "children": [
                   {
@@ -3445,13 +3296,6 @@
               },
               {
                 "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "hasDefaultArg": true,
-                "usr": "s:Sb"
-              },
-              {
-                "kind": "TypeNominal",
                 "name": "Int64",
                 "printedName": "Swift.Int64",
                 "hasDefaultArg": true,
@@ -3459,10 +3303,10 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConDrmConfiguration(im)initWithAvURLAsset:contentId:certificateUrl:authData:delegate:licenseUrl:keyIdList:licenseHttpHeader:licenseCookies:allowsKeyRotation:renewalInterval:",
-            "mangledName": "$s16PallyConFPSSDKTV0aB16DrmConfigurationC10avURLAsset9contentId14certificateUrl8authData8delegate07licenseK003keyI4List0O10HttpHeader0O7Cookies17allowsKeyRotation15renewalIntervalACSo10AVURLAssetC_S3SSgAA0aB18FPSLicenseDelegate_pSgAQSaySSGSgSDyS2SGSgAQSbs5Int64Vtcfc",
+            "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConDrmConfiguration(im)initWithAvURLAsset:contentId:certificateUrl:authData:delegate:licenseUrl:licenseHttpHeader:licenseCookies:renewalInterval:",
+            "mangledName": "$s16PallyConFPSSDKTV0aB16DrmConfigurationC10avURLAsset9contentId14certificateUrl8authData8delegate07licenseK00O10HttpHeader0O7Cookies15renewalIntervalACSo10AVURLAssetC_S3SSgAA0aB18FPSLicenseDelegate_pSgAOSDyS2SGSgAOs5Int64Vtcfc",
             "moduleName": "PallyConFPSSDKTV",
-            "objc_name": "initWithAvURLAsset:contentId:certificateUrl:authData:delegate:licenseUrl:keyIdList:licenseHttpHeader:licenseCookies:allowsKeyRotation:renewalInterval:",
+            "objc_name": "initWithAvURLAsset:contentId:certificateUrl:authData:delegate:licenseUrl:licenseHttpHeader:licenseCookies:renewalInterval:",
             "declAttributes": [
               "AccessControl",
               "ObjC",
@@ -3511,6 +3355,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -3625,14 +3483,14 @@
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "NSNumber",
-                "printedName": "Foundation.NSNumber",
-                "usr": "c:objc(cs)NSNumber"
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
               }
             ],
             "declKind": "Var",
             "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConResult(py)isSuccess",
-            "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC9isSuccessSo8NSNumberCvp",
+            "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC9isSuccessSbvp",
             "moduleName": "PallyConFPSSDKTV",
             "declAttributes": [
               "HasStorage",
@@ -3649,14 +3507,14 @@
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "NSNumber",
-                    "printedName": "Foundation.NSNumber",
-                    "usr": "c:objc(cs)NSNumber"
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
                   }
                 ],
                 "declKind": "Accessor",
                 "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConResult(im)isSuccess",
-                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC9isSuccessSo8NSNumberCvg",
+                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC9isSuccessSbvg",
                 "moduleName": "PallyConFPSSDKTV",
                 "implicit": true,
                 "declAttributes": [
@@ -3676,14 +3534,14 @@
                   },
                   {
                     "kind": "TypeNominal",
-                    "name": "NSNumber",
-                    "printedName": "Foundation.NSNumber",
-                    "usr": "c:objc(cs)NSNumber"
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
                   }
                 ],
                 "declKind": "Accessor",
                 "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConResult(im)setIsSuccess:",
-                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC9isSuccessSo8NSNumberCvs",
+                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC9isSuccessSbvs",
                 "moduleName": "PallyConFPSSDKTV",
                 "implicit": true,
                 "declAttributes": [
@@ -3703,11 +3561,60 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:16PallyConFPSSDKTV0aB6ResultC9isSuccessSo8NSNumberCvM",
-                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC9isSuccessSo8NSNumberCvM",
+                "usr": "s:16PallyConFPSSDKTV0aB6ResultC9isSuccessSbvM",
+                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC9isSuccessSbvM",
                 "moduleName": "PallyConFPSSDKTV",
                 "implicit": true,
                 "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "isSuccessNumber",
+            "printedName": "isSuccessNumber",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "NSNumber",
+                "printedName": "Foundation.NSNumber",
+                "usr": "c:objc(cs)NSNumber"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConResult(py)isSuccessNumber",
+            "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC15isSuccessNumberSo8NSNumberCvp",
+            "moduleName": "PallyConFPSSDKTV",
+            "declAttributes": [
+              "HasStorage",
+              "SetterAccess",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "NSNumber",
+                    "printedName": "Foundation.NSNumber",
+                    "usr": "c:objc(cs)NSNumber"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConResult(im)isSuccessNumber",
+                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC15isSuccessNumberSo8NSNumberCvg",
+                "moduleName": "PallyConFPSSDKTV",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
               }
             ]
           },
@@ -3831,27 +3738,27 @@
           },
           {
             "kind": "Var",
-            "name": "playbackExpiry",
-            "printedName": "playbackExpiry",
+            "name": "offlineExpiry",
+            "printedName": "offlineExpiry",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "Swift.String?",
+                "printedName": "PallyConFPSSDKTV.PallyConOfflineExpiryDate?",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
+                    "name": "PallyConOfflineExpiryDate",
+                    "printedName": "PallyConFPSSDKTV.PallyConOfflineExpiryDate",
+                    "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConOfflineExpiryDate"
                   }
                 ],
                 "usr": "s:Sq"
               }
             ],
             "declKind": "Var",
-            "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConResult(py)playbackExpiry",
-            "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC14playbackExpirySSSgvp",
+            "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConResult(py)offlineExpiry",
+            "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC13offlineExpiryAA0ab7OfflineF4DateCSgvp",
             "moduleName": "PallyConFPSSDKTV",
             "declAttributes": [
               "HasInitialValue",
@@ -3870,21 +3777,21 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Optional",
-                    "printedName": "Swift.String?",
+                    "printedName": "PallyConFPSSDKTV.PallyConOfflineExpiryDate?",
                     "children": [
                       {
                         "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
+                        "name": "PallyConOfflineExpiryDate",
+                        "printedName": "PallyConFPSSDKTV.PallyConOfflineExpiryDate",
+                        "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConOfflineExpiryDate"
                       }
                     ],
                     "usr": "s:Sq"
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConResult(im)playbackExpiry",
-                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC14playbackExpirySSSgvg",
+                "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConResult(im)offlineExpiry",
+                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC13offlineExpiryAA0ab7OfflineF4DateCSgvg",
                 "moduleName": "PallyConFPSSDKTV",
                 "implicit": true,
                 "declAttributes": [
@@ -3905,21 +3812,21 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Optional",
-                    "printedName": "Swift.String?",
+                    "printedName": "PallyConFPSSDKTV.PallyConOfflineExpiryDate?",
                     "children": [
                       {
                         "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
+                        "name": "PallyConOfflineExpiryDate",
+                        "printedName": "PallyConFPSSDKTV.PallyConOfflineExpiryDate",
+                        "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConOfflineExpiryDate"
                       }
                     ],
                     "usr": "s:Sq"
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConResult(im)setPlaybackExpiry:",
-                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC14playbackExpirySSSgvs",
+                "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConResult(im)setOfflineExpiry:",
+                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC13offlineExpiryAA0ab7OfflineF4DateCSgvs",
                 "moduleName": "PallyConFPSSDKTV",
                 "implicit": true,
                 "declAttributes": [
@@ -3939,8 +3846,8 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:16PallyConFPSSDKTV0aB6ResultC14playbackExpirySSSgvM",
-                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC14playbackExpirySSSgvM",
+                "usr": "s:16PallyConFPSSDKTV0aB6ResultC13offlineExpiryAA0ab7OfflineF4DateCSgvM",
+                "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC13offlineExpiryAA0ab7OfflineF4DateCSgvM",
                 "moduleName": "PallyConFPSSDKTV",
                 "implicit": true,
                 "accessorKind": "_modify"
@@ -4061,7 +3968,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(contentId:isSuccess:keyId:playbackExpiry:error:)",
+            "printedName": "init(contentId:isSuccess:keyId:offlineExpiry:error:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -4077,10 +3984,10 @@
               },
               {
                 "kind": "TypeNominal",
-                "name": "NSNumber",
-                "printedName": "Foundation.NSNumber",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
                 "hasDefaultArg": true,
-                "usr": "c:objc(cs)NSNumber"
+                "usr": "s:Sb"
               },
               {
                 "kind": "TypeNominal",
@@ -4100,13 +4007,13 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "Swift.String?",
+                "printedName": "PallyConFPSSDKTV.PallyConOfflineExpiryDate?",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
+                    "name": "PallyConOfflineExpiryDate",
+                    "printedName": "PallyConFPSSDKTV.PallyConOfflineExpiryDate",
+                    "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConOfflineExpiryDate"
                   }
                 ],
                 "hasDefaultArg": true,
@@ -4129,8 +4036,8 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:16PallyConFPSSDKTV0aB6ResultC9contentId9isSuccess03keyF014playbackExpiry5errorACSS_So8NSNumberCSSSgAkA0aB5ErrorOSgtcfc",
-            "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC9contentId9isSuccess03keyF014playbackExpiry5errorACSS_So8NSNumberCSSSgAkA0aB5ErrorOSgtcfc",
+            "usr": "s:16PallyConFPSSDKTV0aB6ResultC9contentId9isSuccess03keyF013offlineExpiry5errorACSS_SbSSSgAA0ab7OfflineK4DateCSgAA0aB5ErrorOSgtcfc",
+            "mangledName": "$s16PallyConFPSSDKTV0aB6ResultC9contentId9isSuccess03keyF013offlineExpiry5errorACSS_SbSSSgAA0ab7OfflineK4DateCSgAA0aB5ErrorOSgtcfc",
             "moduleName": "PallyConFPSSDKTV",
             "declAttributes": [
               "AccessControl"
@@ -4201,6 +4108,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -4785,6 +4706,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Error",
             "printedName": "Error",
             "usr": "s:s5ErrorP",
@@ -4796,6 +4731,573 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PallyConOfflineExpiryDate",
+        "printedName": "PallyConOfflineExpiryDate",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "offlineLicenseDownloadedDate",
+            "printedName": "offlineLicenseDownloadedDate",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.Date?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Date",
+                    "printedName": "Foundation.Date",
+                    "usr": "s:10Foundation4DateV"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC024offlineLicenseDownloadedF010Foundation0F0VSgvp",
+            "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC024offlineLicenseDownloadedF010Foundation0F0VSgvp",
+            "moduleName": "PallyConFPSSDKTV",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "SetterAccess",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.Date?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Date",
+                        "printedName": "Foundation.Date",
+                        "usr": "s:10Foundation4DateV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC024offlineLicenseDownloadedF010Foundation0F0VSgvg",
+                "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC024offlineLicenseDownloadedF010Foundation0F0VSgvg",
+                "moduleName": "PallyConFPSSDKTV",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "rentalExpiryDate",
+            "printedName": "rentalExpiryDate",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.Date?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Date",
+                    "printedName": "Foundation.Date",
+                    "usr": "s:10Foundation4DateV"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC06rentaleF010Foundation0F0VSgvp",
+            "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC06rentaleF010Foundation0F0VSgvp",
+            "moduleName": "PallyConFPSSDKTV",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "SetterAccess",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.Date?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Date",
+                        "printedName": "Foundation.Date",
+                        "usr": "s:10Foundation4DateV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC06rentaleF010Foundation0F0VSgvg",
+                "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC06rentaleF010Foundation0F0VSgvg",
+                "moduleName": "PallyConFPSSDKTV",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "playbackExpiryDate",
+            "printedName": "playbackExpiryDate",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.Date?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Date",
+                    "printedName": "Foundation.Date",
+                    "usr": "s:10Foundation4DateV"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC08playbackeF010Foundation0F0VSgvp",
+            "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC08playbackeF010Foundation0F0VSgvp",
+            "moduleName": "PallyConFPSSDKTV",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "SetterAccess",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.Date?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Date",
+                        "printedName": "Foundation.Date",
+                        "usr": "s:10Foundation4DateV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC08playbackeF010Foundation0F0VSgvg",
+                "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC08playbackeF010Foundation0F0VSgvg",
+                "moduleName": "PallyConFPSSDKTV",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "rentalDuration",
+            "printedName": "rentalDuration",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC14rentalDurationSSSgvp",
+            "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC14rentalDurationSSSgvp",
+            "moduleName": "PallyConFPSSDKTV",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "SetterAccess",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC14rentalDurationSSSgvg",
+                "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC14rentalDurationSSSgvg",
+                "moduleName": "PallyConFPSSDKTV",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "playbackDuration",
+            "printedName": "playbackDuration",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC16playbackDurationSSSgvp",
+            "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC16playbackDurationSSSgvp",
+            "moduleName": "PallyConFPSSDKTV",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "SetterAccess",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC16playbackDurationSSSgvg",
+                "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC16playbackDurationSSSgvg",
+                "moduleName": "PallyConFPSSDKTV",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(downloadDate:rentalDuration:playbackDuration:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PallyConOfflineExpiryDate",
+                "printedName": "PallyConFPSSDKTV.PallyConOfflineExpiryDate",
+                "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConOfflineExpiryDate"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.Date?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Date",
+                    "printedName": "Foundation.Date",
+                    "usr": "s:10Foundation4DateV"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConOfflineExpiryDate(im)initWithDownloadDate:rentalDuration:playbackDuration:",
+            "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC08downloadF014rentalDuration08playbackI0AC10Foundation0F0VSg_SSSgAKtcfc",
+            "moduleName": "PallyConFPSSDKTV",
+            "objc_name": "initWithDownloadDate:rentalDuration:playbackDuration:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "update",
+            "printedName": "update(downloadDate:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Date",
+                "printedName": "Foundation.Date",
+                "usr": "s:10Foundation4DateV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC6update08downloadF0y10Foundation0F0V_tF",
+            "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC6update08downloadF0y10Foundation0F0V_tF",
+            "moduleName": "PallyConFPSSDKTV",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "update",
+            "printedName": "update(rentalDuration:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC6update14rentalDurationySS_tF",
+            "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC6update14rentalDurationySS_tF",
+            "moduleName": "PallyConFPSSDKTV",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "update",
+            "printedName": "update(playbackDuration:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:16PallyConFPSSDKTV0aB17OfflineExpiryDateC6update16playbackDurationySS_tF",
+            "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC6update16playbackDurationySS_tF",
+            "moduleName": "PallyConFPSSDKTV",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PallyConOfflineExpiryDate",
+                "printedName": "PallyConFPSSDKTV.PallyConOfflineExpiryDate",
+                "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConOfflineExpiryDate"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConOfflineExpiryDate(im)init",
+            "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateCACycfc",
+            "moduleName": "PallyConFPSSDKTV",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@PallyConFPSSDKTV@objc(cs)PallyConOfflineExpiryDate",
+        "mangledName": "$s16PallyConFPSSDKTV0aB17OfflineExpiryDateC",
+        "moduleName": "PallyConFPSSDKTV",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC",
+          "RawDocComment"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
           }
         ]
       },
@@ -5275,6 +5777,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Error",
             "printedName": "Error",
             "usr": "s:s5ErrorP",
@@ -5667,6 +6183,22 @@
           "AccessControl",
           "ObjC",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -6227,6 +6759,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -6295,6 +6841,28 @@
             ],
             "usr": "s:7Combine16ObservableObjectP",
             "mangledName": "$s7Combine16ObservableObjectP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Identifiable",
+            "printedName": "Identifiable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "ID",
+                "printedName": "ID",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ObjectIdentifier",
+                    "printedName": "Swift.ObjectIdentifier",
+                    "usr": "s:SO"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s12IdentifiableP",
+            "mangledName": "$ss12IdentifiableP"
           }
         ]
       },
@@ -6742,6 +7310,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -6810,6 +7392,28 @@
             ],
             "usr": "s:7Combine16ObservableObjectP",
             "mangledName": "$s7Combine16ObservableObjectP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Identifiable",
+            "printedName": "Identifiable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "ID",
+                "printedName": "ID",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ObjectIdentifier",
+                    "printedName": "Swift.ObjectIdentifier",
+                    "usr": "s:SO"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s12IdentifiableP",
+            "mangledName": "$ss12IdentifiableP"
           }
         ]
       },
@@ -7241,6 +7845,109 @@
           },
           {
             "kind": "Var",
+            "name": "key_id",
+            "printedName": "key_id",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@CM@PallyConFPSSDKTV@objc(cs)License(py)key_id",
+            "mangledName": "$s16PallyConFPSSDKTV7LicenseC6key_idSSSgvp",
+            "moduleName": "PallyConFPSSDKTV",
+            "declAttributes": [
+              "Dynamic",
+              "AccessControl",
+              "NSManaged",
+              "ObjC"
+            ],
+            "isFromExtension": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@CM@PallyConFPSSDKTV@objc(cs)License(im)key_id",
+                "mangledName": "$s16PallyConFPSSDKTV7LicenseC6key_idSSSgvg",
+                "moduleName": "PallyConFPSSDKTV",
+                "implicit": true,
+                "declAttributes": [
+                  "Dynamic",
+                  "ObjC"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@CM@PallyConFPSSDKTV@objc(cs)License(im)setKey_id:",
+                "mangledName": "$s16PallyConFPSSDKTV7LicenseC6key_idSSSgvs",
+                "moduleName": "PallyConFPSSDKTV",
+                "implicit": true,
+                "declAttributes": [
+                  "Dynamic",
+                  "ObjC"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "set"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "licenseType",
             "printedName": "licenseType",
             "children": [
@@ -7550,6 +8257,212 @@
           },
           {
             "kind": "Var",
+            "name": "playback_duration",
+            "printedName": "playback_duration",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@CM@PallyConFPSSDKTV@objc(cs)License(py)playback_duration",
+            "mangledName": "$s16PallyConFPSSDKTV7LicenseC17playback_durationSSSgvp",
+            "moduleName": "PallyConFPSSDKTV",
+            "declAttributes": [
+              "Dynamic",
+              "AccessControl",
+              "NSManaged",
+              "ObjC"
+            ],
+            "isFromExtension": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@CM@PallyConFPSSDKTV@objc(cs)License(im)playback_duration",
+                "mangledName": "$s16PallyConFPSSDKTV7LicenseC17playback_durationSSSgvg",
+                "moduleName": "PallyConFPSSDKTV",
+                "implicit": true,
+                "declAttributes": [
+                  "Dynamic",
+                  "ObjC"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@CM@PallyConFPSSDKTV@objc(cs)License(im)setPlayback_duration:",
+                "mangledName": "$s16PallyConFPSSDKTV7LicenseC17playback_durationSSSgvs",
+                "moduleName": "PallyConFPSSDKTV",
+                "implicit": true,
+                "declAttributes": [
+                  "Dynamic",
+                  "ObjC"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "set"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "rental_duration",
+            "printedName": "rental_duration",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@CM@PallyConFPSSDKTV@objc(cs)License(py)rental_duration",
+            "mangledName": "$s16PallyConFPSSDKTV7LicenseC15rental_durationSSSgvp",
+            "moduleName": "PallyConFPSSDKTV",
+            "declAttributes": [
+              "Dynamic",
+              "AccessControl",
+              "NSManaged",
+              "ObjC"
+            ],
+            "isFromExtension": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@CM@PallyConFPSSDKTV@objc(cs)License(im)rental_duration",
+                "mangledName": "$s16PallyConFPSSDKTV7LicenseC15rental_durationSSSgvg",
+                "moduleName": "PallyConFPSSDKTV",
+                "implicit": true,
+                "declAttributes": [
+                  "Dynamic",
+                  "ObjC"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@CM@PallyConFPSSDKTV@objc(cs)License(im)setRental_duration:",
+                "mangledName": "$s16PallyConFPSSDKTV7LicenseC15rental_durationSSSgvs",
+                "moduleName": "PallyConFPSSDKTV",
+                "implicit": true,
+                "declAttributes": [
+                  "Dynamic",
+                  "ObjC"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "set"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "userId",
             "printedName": "userId",
             "children": [
@@ -7772,6 +8685,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -7840,6 +8767,28 @@
             ],
             "usr": "s:7Combine16ObservableObjectP",
             "mangledName": "$s7Combine16ObservableObjectP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Identifiable",
+            "printedName": "Identifiable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "ID",
+                "printedName": "ID",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ObjectIdentifier",
+                    "printedName": "Swift.ObjectIdentifier",
+                    "usr": "s:SO"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s12IdentifiableP",
+            "mangledName": "$ss12IdentifiableP"
           }
         ]
       },
@@ -7904,27 +8853,6 @@
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConInCustomStructs.swift",
-      "kind": "IntegerLiteral",
-      "offset": 230,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConInCustomStructs.swift",
-      "kind": "IntegerLiteral",
-      "offset": 241,
-      "length": 8,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConInCustomStructs.swift",
-      "kind": "IntegerLiteral",
-      "offset": 259,
-      "length": 8,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConInCustomStructs.swift",
       "kind": "BooleanLiteral",
       "offset": 620,
       "length": 5,
@@ -7932,48 +8860,6 @@
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConInCustomStructs.swift",
-      "kind": "StringLiteral",
-      "offset": 318,
-      "length": 17,
-      "value": "\"PallyConFPSSDKTV.PallyConTokenInfo\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConInCustomStructs.swift",
-      "kind": "StringLiteral",
-      "offset": 849,
-      "length": 22,
-      "value": "\"PallyConFPSSDKTV.PallyConCustomDataInfo\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConInCustomStructs.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1885,
-      "length": 3,
-      "value": "300"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConInCustomStructs.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1929,
-      "length": 3,
-      "value": "600"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConInCustomStructs.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1977,
-      "length": 3,
-      "value": "900"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConInCustomStructs.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2015,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConInCustomStructs.swift",
       "kind": "IntegerLiteral",
       "offset": 1885,
       "length": 3,
@@ -8034,55 +8920,6 @@
       "offset": 342,
       "length": 9,
       "value": "\"nothing\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/DatabaseController.swift",
-      "kind": "StringLiteral",
-      "offset": 227,
-      "length": 10,
-      "value": "\"complete\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/DatabaseController.swift",
-      "kind": "StringLiteral",
-      "offset": 255,
-      "length": 7,
-      "value": "\"pause\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/DatabaseController.swift",
-      "kind": "StringLiteral",
-      "offset": 279,
-      "length": 6,
-      "value": "\"fail\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/DatabaseController.swift",
-      "kind": "StringLiteral",
-      "offset": 309,
-      "length": 13,
-      "value": "\"downloading\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/DatabaseController.swift",
-      "kind": "StringLiteral",
-      "offset": 342,
-      "length": 9,
-      "value": "\"nothing\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/DatabaseController.swift",
-      "kind": "StringLiteral",
-      "offset": 400,
-      "length": 8,
-      "value": "\"rental\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/DatabaseController.swift",
-      "kind": "StringLiteral",
-      "offset": 425,
-      "length": 6,
-      "value": "\"less\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/DatabaseController.swift",
@@ -8143,44 +8980,23 @@
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConFPSSDK.swift",
       "kind": "BooleanLiteral",
-      "offset": 3505,
+      "offset": 3475,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConFPSSDK.swift",
       "kind": "BooleanLiteral",
-      "offset": 4705,
+      "offset": 4675,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConFPSSDK.swift",
       "kind": "BooleanLiteral",
-      "offset": 5851,
+      "offset": 5821,
       "length": 5,
       "value": "false"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 231,
-      "length": 10,
-      "value": "\"Customer\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 261,
-      "length": 9,
-      "value": "\"License\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 293,
-      "length": 12,
-      "value": "\"ContentKey\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
@@ -8213,147 +9029,91 @@
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 372,
+      "offset": 376,
       "length": 10,
       "value": "\"duration\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 401,
-      "length": 16,
-      "value": "\"playbackExpiry\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 433,
+      "offset": 409,
       "length": 15,
       "value": "\"persistentKey\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 464,
+      "offset": 440,
       "length": 8,
       "value": "\"userId\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 347,
-      "length": 5,
-      "value": "\"cId\""
+      "offset": 474,
+      "length": 14,
+      "value": "\"downloadDate\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 372,
-      "length": 10,
-      "value": "\"duration\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 401,
-      "length": 16,
-      "value": "\"playbackExpiry\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 433,
-      "length": 15,
-      "value": "\"persistentKey\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 464,
+      "offset": 507,
       "length": 8,
-      "value": "\"userId\""
+      "value": "\"key_id\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 516,
+      "offset": 545,
+      "length": 19,
+      "value": "\"playback_duration\""
+    },
+    {
+      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
+      "kind": "StringLiteral",
+      "offset": 592,
+      "length": 17,
+      "value": "\"rental_duration\""
+    },
+    {
+      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
+      "kind": "StringLiteral",
+      "offset": 653,
       "length": 7,
       "value": "\"keyId\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 540,
+      "offset": 677,
       "length": 16,
       "value": "\"playbackExpiry\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 573,
+      "offset": 710,
       "length": 9,
       "value": "\"keyData\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 516,
-      "length": 7,
-      "value": "\"keyId\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 540,
-      "length": 16,
-      "value": "\"playbackExpiry\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 573,
-      "length": 9,
-      "value": "\"keyData\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 628,
+      "offset": 765,
       "length": 5,
       "value": "\"url\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 650,
+      "offset": 787,
       "length": 10,
       "value": "\"siteCert\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 676,
-      "length": 8,
-      "value": "\"siteId\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 628,
-      "length": 5,
-      "value": "\"url\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 650,
-      "length": 10,
-      "value": "\"siteCert\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/PallyConCoreDataManager.swift",
-      "kind": "StringLiteral",
-      "offset": 676,
+      "offset": 813,
       "length": 8,
       "value": "\"siteId\""
     },
@@ -8421,11 +9181,39 @@
       "value": "\"com.inka.apple-samplecode.resourcerequests\""
     },
     {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/FPSLicenseDownloader.swift",
+      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/MovpkgParser.swift",
+      "kind": "Array",
+      "offset": 322,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/MovpkgParser.swift",
+      "kind": "BooleanLiteral",
+      "offset": 942,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/MovpkgParser.swift",
       "kind": "StringLiteral",
-      "offset": 1046,
-      "length": 20,
-      "value": "\"PallyConFPSSDKTV.FPSLicenseDownloader\""
+      "offset": 982,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/MovpkgParser.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1021,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/MovpkgParser.swift",
+      "kind": "Dictionary",
+      "offset": 1305,
+      "length": 3,
+      "value": "[]"
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/DataBase\/CoreDataStack.swift",
@@ -8544,90 +9332,6 @@
       "kind": "IntegerLiteral",
       "offset": 9125,
       "length": 5,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/AES.swift",
-      "kind": "IntegerLiteral",
-      "offset": 9107,
-      "length": 9,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/AES.swift",
-      "kind": "IntegerLiteral",
-      "offset": 9118,
-      "length": 5,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/AES.swift",
-      "kind": "IntegerLiteral",
-      "offset": 9125,
-      "length": 5,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/AES.swift",
-      "kind": "IntegerLiteral",
-      "offset": 9107,
-      "length": 9,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/AES.swift",
-      "kind": "IntegerLiteral",
-      "offset": 9118,
-      "length": 5,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/AES.swift",
-      "kind": "IntegerLiteral",
-      "offset": 9125,
-      "length": 5,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/AES.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12764,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/AES.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12767,
-      "length": 6,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/AES.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12775,
-      "length": 6,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/AES.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12764,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/AES.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12767,
-      "length": 6,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/AES.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12775,
-      "length": 6,
       "value": "3"
     },
     {
@@ -8752,105 +9456,70 @@
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConLicenseManager.swift",
       "kind": "StringLiteral",
-      "offset": 294,
+      "offset": 1803,
       "length": 5,
       "value": "\"skd\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConLicenseManager.swift",
       "kind": "StringLiteral",
-      "offset": 423,
+      "offset": 1932,
       "length": 32,
       "value": "\"com.inka.pallycon.requestQueue\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConLicenseManager.swift",
       "kind": "BooleanLiteral",
-      "offset": 679,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConLicenseManager.swift",
-      "kind": "StringLiteral",
-      "offset": 222,
-      "length": 22,
-      "value": "\"PallyConFPSSDKTV.PallyConLicenseManager\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/PallyConFPSSDK\/PallyConDrmConfiguration.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1190,
+      "offset": 2188,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/PallyConFPSSDK\/PallyConDrmConfiguration.swift",
       "kind": "BooleanLiteral",
-      "offset": 1772,
+      "offset": 2736,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/PallyConFPSSDK\/PallyConDrmConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 276,
-      "length": 24,
-      "value": "\"PallyConFPSSDKTV.PallyConDrmConfiguration\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/PallyConFPSSDK\/PallyConDrmConfiguration.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2894,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/PallyConFPSSDK\/PallyConDrmConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 2345,
-      "length": 14,
-      "value": "\"PallyConFPSSDKTV.PallyConResult\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/PallyConFPSSDK\/PallyConDrmConfiguration.swift",
       "kind": "IntegerLiteral",
-      "offset": 5199,
+      "offset": 4481,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/PallyConFPSSDK\/PallyConDrmConfiguration.swift",
       "kind": "IntegerLiteral",
-      "offset": 5276,
+      "offset": 4558,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/PallyConFPSSDK\/PallyConDrmConfiguration.swift",
       "kind": "IntegerLiteral",
-      "offset": 5355,
+      "offset": 4637,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/PallyConFPSSDK\/PallyConDrmConfiguration.swift",
       "kind": "IntegerLiteral",
-      "offset": 5436,
+      "offset": 4718,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/PallyConFPSSDK\/PallyConDrmConfiguration.swift",
       "kind": "IntegerLiteral",
-      "offset": 5522,
+      "offset": 4804,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/PallyConFPSSDK\/PallyConDrmConfiguration.swift",
       "kind": "IntegerLiteral",
-      "offset": 5664,
+      "offset": 4946,
       "length": 2,
       "value": "-1"
     },
@@ -8888,13 +9557,6 @@
       "offset": 494,
       "length": 10,
       "value": "\"SV004005\""
-    },
-    {
-      "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/PallyConSDKAuthorize.swift",
-      "kind": "StringLiteral",
-      "offset": 305,
-      "length": 20,
-      "value": "\"PallyConFPSSDKTV.PallyConSDKAuthorize\""
     },
     {
       "filePath": "\/Users\/yhpark\/work\/pallycon\/fps\/PallyConFPSSDK\/Shared\/Utils\/StringExtension.swift",

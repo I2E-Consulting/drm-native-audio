@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
-// swift-module-flags: -target arm64-apple-tvos11.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name PallyConFPSSDKTV
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+// swift-module-flags: -target arm64-apple-tvos15.6 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name PallyConFPSSDKTV
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
 import AVFoundation
 import CommonCrypto/*.CC_LONG*/
 import CommonCrypto/*.CC_MD5*/
@@ -100,21 +101,25 @@ extension PallyConFPSSDKTV.PallyConFPSSDK {
   final public let authData: Swift.String?
   public var delegate: (any PallyConFPSSDKTV.PallyConFPSLicenseDelegate)?
   public var licenseUrl: Swift.String?
-  public var keyIdList: [Swift.String]?
   public var licenseHttpHeader: [Swift.String : Swift.String]?
   public var licenseCookies: Swift.String?
-  public var allowsKeyRotation: Swift.Bool
   public var renewalInterval: Swift.Int64
-  @objc public init(avURLAsset: AVFoundation.AVURLAsset, contentId id: Swift.String, certificateUrl url: Swift.String, authData: Swift.String? = nil, delegate: (any PallyConFPSSDKTV.PallyConFPSLicenseDelegate)? = nil, licenseUrl: Swift.String? = nil, keyIdList: [Swift.String]? = nil, licenseHttpHeader: [Swift.String : Swift.String]? = nil, licenseCookies: Swift.String? = nil, allowsKeyRotation: Swift.Bool = false, renewalInterval: Swift.Int64 = RenewalInterval.Zero.rawValue)
+  @objc public init(avURLAsset: AVFoundation.AVURLAsset, contentId id: Swift.String, certificateUrl url: Swift.String, authData: Swift.String? = nil, delegate: (any PallyConFPSSDKTV.PallyConFPSLicenseDelegate)? = nil, licenseUrl: Swift.String? = nil, licenseHttpHeader: [Swift.String : Swift.String]? = nil, licenseCookies: Swift.String? = nil, renewalInterval: Swift.Int64 = RenewalInterval.Zero.rawValue)
   @objc deinit
 }
 @objc public class PallyConResult : ObjectiveC.NSObject {
   @objc final public let contentId: Swift.String
-  @objc public var isSuccess: Foundation.NSNumber
+  @objc public var isSuccess: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public var isSuccessNumber: Foundation.NSNumber {
+    get
+  }
   @objc public var keyId: Swift.String?
-  @objc public var playbackExpiry: Swift.String?
+  @objc public var offlineExpiry: PallyConFPSSDKTV.PallyConOfflineExpiryDate?
   public var error: PallyConFPSSDKTV.PallyConError?
-  public init(contentId: Swift.String, isSuccess: Foundation.NSNumber = false as NSNumber, keyId: Swift.String? = nil, playbackExpiry: Swift.String? = nil, error: PallyConFPSSDKTV.PallyConError? = nil)
+  public init(contentId: Swift.String, isSuccess: Swift.Bool = false, keyId: Swift.String? = nil, offlineExpiry: PallyConFPSSDKTV.PallyConOfflineExpiryDate? = nil, error: PallyConFPSSDKTV.PallyConError? = nil)
   @objc public func getPallyConErrorForObjC() -> (Swift.String)
   @objc deinit
 }
@@ -127,6 +132,28 @@ public enum PallyConError : Swift.Error {
   case failed(errorCode: Swift.Int = -1, comment: Swift.String)
   case invalid(comment: Swift.String)
   case unknown(errorCode: Swift.Int = -1, comment: Swift.String)
+}
+@objc public class PallyConOfflineExpiryDate : ObjectiveC.NSObject {
+  public var offlineLicenseDownloadedDate: Foundation.Date? {
+    get
+  }
+  public var rentalExpiryDate: Foundation.Date? {
+    get
+  }
+  public var playbackExpiryDate: Foundation.Date? {
+    get
+  }
+  public var rentalDuration: Swift.String? {
+    get
+  }
+  public var playbackDuration: Swift.String? {
+    get
+  }
+  @objc public init(downloadDate: Foundation.Date? = nil, rentalDuration: Swift.String? = nil, playbackDuration: Swift.String? = nil)
+  public func update(downloadDate: Foundation.Date)
+  public func update(rentalDuration: Swift.String)
+  public func update(playbackDuration: Swift.String)
+  @objc deinit
 }
 @available(tvOS, deprecated, message: "Use the `PallyConError` instead")
 public enum PallyConSDKException : Swift.Error {
@@ -175,6 +202,9 @@ extension PallyConFPSSDKTV.ContentKey {
     @objc set
   }
 }
+extension PallyConFPSSDKTV.ContentKey : Swift.Identifiable {
+  public typealias ID = Swift.ObjectIdentifier
+}
 @objc @_inheritsConvenienceInitializers public class Customer : CoreData.NSManagedObject {
   @objc override dynamic public init(entity: CoreData.NSEntityDescription, insertInto context: CoreData.NSManagedObjectContext?)
   @objc deinit
@@ -194,6 +224,9 @@ extension PallyConFPSSDKTV.Customer {
     @objc set
   }
 }
+extension PallyConFPSSDKTV.Customer : Swift.Identifiable {
+  public typealias ID = Swift.ObjectIdentifier
+}
 @objc @_inheritsConvenienceInitializers public class License : CoreData.NSManagedObject {
   @objc override dynamic public init(entity: CoreData.NSEntityDescription, insertInto context: CoreData.NSManagedObjectContext?)
   @objc deinit
@@ -212,6 +245,10 @@ extension PallyConFPSSDKTV.License {
     @objc get
     @objc set
   }
+  @objc @NSManaged dynamic public var key_id: Swift.String? {
+    @objc get
+    @objc set
+  }
   @objc @NSManaged dynamic public var licenseType: Swift.String? {
     @objc get
     @objc set
@@ -224,6 +261,14 @@ extension PallyConFPSSDKTV.License {
     @objc get
     @objc set
   }
+  @objc @NSManaged dynamic public var playback_duration: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc @NSManaged dynamic public var rental_duration: Swift.String? {
+    @objc get
+    @objc set
+  }
   @objc @NSManaged dynamic public var userId: Swift.String? {
     @objc get
     @objc set
@@ -232,6 +277,9 @@ extension PallyConFPSSDKTV.License {
     @objc get
     @objc set
   }
+}
+extension PallyConFPSSDKTV.License : Swift.Identifiable {
+  public typealias ID = Swift.ObjectIdentifier
 }
 extension PallyConFPSSDKTV.DrmType : Swift.Equatable {}
 extension PallyConFPSSDKTV.DrmType : Swift.Hashable {}
